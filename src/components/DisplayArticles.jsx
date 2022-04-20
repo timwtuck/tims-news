@@ -1,15 +1,18 @@
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom'
 
 const Article = ({article}) => {
 
     return (
-        <section className="article" data-id={article.article_id}>
-            <h3>{article.title}</h3>
-            <p className="article__body">{article.body}</p>
-            <p className="article__author">posted by: {article.author}</p>
-            <p className="article__comment-count">Comments: {article.comment_count}</p>
-            <p className="article__votes">votes: {article.votes}</p>
-        </section>
+        <Link className="article__link" to={`/article/${article.article_id}`}>
+            <section className="article">
+                <h3>{article.title}</h3>
+                <p className="article__body">{article.body}</p>
+                <p className="article__author">posted by: {article.author}</p>
+                <p className="article__comment-count">Comments: {article.comment_count}</p>
+                <p className="article__votes">votes: {article.votes}</p>
+            </section>
+        </Link>
     )
 }
 
@@ -39,7 +42,7 @@ const DisplayArticles = ({api, query}) => {
 
     return (
         <section className="display-articles">
-            {articles.map(article => <Article article={article}/>)}
+            {articles.map(article => <Article key={article.article_id} article={article}/>)}
             <button hidden={toDisplay >= totalCount ? "hidden" : ""} 
                 onClick={onDisplayMore}>Display More</button>
         </section>

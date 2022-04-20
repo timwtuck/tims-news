@@ -43,6 +43,10 @@
 /*---------------------------------------------------------*/
 /* Article                                                */
 
+.article__link {
+  text-decoration: none;
+}
+
 .article {
   border: thin solid black;
   padding: 5px;
@@ -54,6 +58,7 @@
     'title author'
     'content content'
     'comments votes';
+  color:black;
 }
 
 .article__body {
