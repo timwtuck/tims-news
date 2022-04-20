@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import DisplayArticles from "./DisplayArticles";
 import SearchBar from "./SearchBar";
 
-const Articles = ({api}) => {
+const Articles = () => {
 
     const [query, setQuery] = useState({
         topic:'',
@@ -14,8 +14,8 @@ const Articles = ({api}) => {
 
     return (
         <main>
-            <SearchBar api={api} setQuery={setQuery}/>
-            <DisplayArticles api={api} query={query}/>
+            <SearchBar setQuery={setQuery}/>
+            <DisplayArticles query={query}/>
         </main>
     );
 

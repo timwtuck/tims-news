@@ -1,18 +1,16 @@
 import { useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
+import { getArticleById } from "../api";
 import Article from './Article'
 
-const DisplayArticle = ({api}) => {
+const DisplayArticle = () => {
 
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
     
     useEffect(() => {
-        api.get(`/articles/${article_id}`)
-            .then(res => {
-                console.log(res.data);
-                setArticle(res.data.article);
-            });
+        getArticleById(article_id)
+            .then(article => setArticle(article))
     }, []); 
 
     function onChangeVote(changeBy) {
@@ -21,9 +19,7 @@ const DisplayArticle = ({api}) => {
 
     return (
         <main>
-            <Article article={article} class="whole-article"/>
-            <button onClick={() => onChangeVote(1)}>↑</button>
-            <button onClick={() => onChangeVote(-1)}>↓</button>
+            <Article article={article} thumbnail={false}/>
         </main>
     );
 }

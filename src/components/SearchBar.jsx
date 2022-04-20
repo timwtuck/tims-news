@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { getTopics } from '../api';
 
 const DropDown = ({children, setState, id}) => {
 
@@ -13,15 +14,15 @@ const DropDown = ({children, setState, id}) => {
     );
 }
 
-const SearchBar = ({setQuery, api}) => { 
+const SearchBar = ({setQuery}) => { 
 
     const [topics, setTopics] = useState([{slug:''}]);
     const [selectedTopic, setSelectedTopic] = useState('');
     const [selectedSortBy, setSelectedSortBy] = useState('Newest');
 
     useEffect(() => {
-        api.get('/topics')
-            .then((res) => setTopics([{slug:''}, ...res.data.topics]));
+        getTopics()
+            .then(topics => setTopics(topics))
     }, []);
 
     function onSearch(e) {
