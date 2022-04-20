@@ -8,9 +8,7 @@ const Articles = ({api}) => {
         topic:'',
         order:'desc',
         sortBy:'votes'
-    });
-    const [articles, setArticles] = useState([]);
-  
+    }); 
 
     return (
         <main>
