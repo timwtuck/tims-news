@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import Articles from './components/Articles';
 import Header from './components/Header';
+import DisplayArticle from './components/DisplayArticle';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Articles api={api}/>}></Route>
+        <Route path='/articles/:article_id' element={<DisplayArticle api={api}/>}></Route>
       </Routes>
     </div>
   );

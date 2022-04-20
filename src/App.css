@@ -41,14 +41,19 @@
 }
 
 /*---------------------------------------------------------*/
-/* Article                                                */
+/* DisplayArticles                                         */
 
-.article {
+.article__link {
+  text-decoration: none;
+  color: black;
+}
+
+.article-thumbnail {
   border: thin solid black;
   padding: 5px;
   margin:2px;
   display: grid;
-  grid-template-columns: auto 70px;;
+  grid-template-columns: auto 70px;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
     'title author'
@@ -56,7 +61,7 @@
     'comments votes';
 }
 
-.article__body {
+.article-thumbnail__body {
   grid-area: content;
   height: 150px;
   text-overflow: ellipsis;
@@ -65,18 +70,18 @@
   
 }
  
-.article__author {
+.article-thumbnail__author {
   grid-area: author;
   font-size: 0.8em;
 
 }
 
-.article__votes {
+.article-thumbnail__votes {
   grid-area: votes;
 
 }
 
-.article__comment-count {
+.article-thumbnail__comment-count {
   grid-area: comments;
   text-align: left;
   padding-left: 10px;
