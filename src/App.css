@@ -154,3 +154,33 @@
   color:rgb(97, 96, 96);
   background-color: whitesmoke;
 }
+
+/*---------------------------------------------------------*/
+/* Add Comment                                             */
+
+.add-comment {
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-template-rows: min-content auto;
+  grid-template-areas: 
+    'label button'
+    'textbox textbox';
+  border: thin solid black;
+}
+
+.add-comment p {
+  grid-area: label;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.add-comment textarea {
+  grid-area: textbox;
+  margin: 10px;
+  min-height: 80px;
+}
+
+.add-comment button {
+  grid-area: button;
+  margin: 10px;
+}
