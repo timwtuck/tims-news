@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 
-const Header = ({user}) => {
+const Header = ({user, setUser}) => {
 
     return (
         <section className="header">
             <h1>Tim's News</h1>
-            {user? <Link to='/account'>{user}'s Account</Link> 
-                : <Link to='/login'>Login</Link>}
+            <div className="header__account">
+                {user?  <>
+                            <Link to='/account'>Account</Link> 
+                            <Link to='/login' onClick={() => setUser(null)}>Logout</Link>
+                        </>
+                    :   <Link to='/login'>Login</Link>}
+            </div>
         </section>);
 }
 

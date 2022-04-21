@@ -21,6 +21,11 @@
   margin: 10px;
 }
 
+.header__account {
+  display: flex;
+  color: blue;
+}
+
 
 /*---------------------------------------------------------*/
 /* Search Bar                                              */

@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header user={user}/>
+      <Header user={user} setUser={setUser}/>
       <Routes>
         <Route path='/' element={<Articles/>}></Route>
         <Route path='/login' element={<Login setUser={setUser}/>}></Route>
