@@ -187,6 +187,19 @@
 }
 
 /*---------------------------------------------------------*/
+/* Votes                                                */
+
+.voted {
+  color:crimson;
+  background-color: grey;
+}
+
+.not-voted {
+  color:rgb(97, 96, 96);
+  background-color: whitesmoke;
+}
+
+/*---------------------------------------------------------*/
 /* Comments                                                */
 
 .comment {

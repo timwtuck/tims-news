@@ -26,7 +26,7 @@ export const getArticleById = (articleId) => {
             .then(res => res.data.article);
 } 
 
-export const patchVote = (articleId, changeBy) => {
+export const patchArticleVote = (articleId, changeBy) => {
 
     return api.patch(`/articles/${articleId}`, {inc_votes: changeBy});
 }
@@ -52,4 +52,9 @@ export const postComment = (articleId, comment) => {
 export const deleteComment = (commentId) => {
 
     return api.delete(`/comments/${commentId}`);
+}
+
+export const patchCommentVote = (commentId, changeBy) => {
+
+    return api.patch(`/comments/${commentId}`, {inc_votes: changeBy});
 }

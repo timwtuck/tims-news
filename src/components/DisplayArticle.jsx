@@ -52,6 +52,8 @@ const DisplayArticle = ({user}) => {
         // post to backend  
         postComment(article_id, {username: user, body: text})
             .then(comment => {
+                // comment from backend has ID (i.e. can be deleted)
+                // so add it in place of the temp one
                 setComments([comment, ...savedComments]);
                 setRequestStatus('success');
             })

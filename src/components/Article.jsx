@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import { patchVote } from '../api';
+import { patchArticleVote } from '../api';
 
 const Article = ({api, article, thumbnail}) => {
 
@@ -69,7 +69,7 @@ const Article = ({api, article, thumbnail}) => {
             }});
         }
 
-        patchVote(article.article_id, changeBy)
+        patchArticleVote(article.article_id, changeBy)
             .then(() => setRequestStatus('success'))
             .catch(() => setRequestStatus('error'));
     }
