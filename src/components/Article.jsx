@@ -1,46 +1,77 @@
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import { patchVote } from '../api';
 
 const Article = ({api, article, thumbnail}) => {
 
     const cssClass = thumbnail ? "article-thumbnail" : "article";
-    const [upvoted, setUpvoted] = useState(false);
-    const [downvoted, setDownvoted] = useState(false);
-    const [votes, setVotes] = useState(0);
+    const [votesState, setVotesState] = useState(
+        {upPressed: false, downPressed: false, votes: 0})
+    const [priorState, setPriorState] = useState(
+        {upPressed: false, downPressed: false, votes: 0});
+    const [requestStatus, setRequestStatus] = useState(null);
 
     //load the votes when the article gets loaded 
     useEffect(()=> {
-        setVotes(article.votes)
+        setVotesState({...votesState, votes: article.votes})
+        setPriorState({...priorState, votes: article.votes});
     }, [article]);
 
+    // handle error if api call errors
+    useEffect(() => {
+        if (!requestStatus)
+            return;
+
+        if (requestStatus === 'error'){
+            setVotesState({...priorState});
+            alert('Something went wrong, please try again');
+        } else {
+            setPriorState({...votesState});
+        }
+
+        setRequestStatus(null);
+    }, [requestStatus])
+
     function onChangeVote(upvotePressed){
+
+        //change the vote buttons. Buttons can toggle,
+        // but also only one button can be toggled 'on'
+        // at a time, so must force toggle off in this case.
 
         let changeBy = 0;
 
         if (upvotePressed){
-            if (upvoted)
+            if (votesState.upPressed)
                 changeBy--;
-            else if (downvoted)
+            else if (votesState.downPressed)
                 changeBy += 2;
             else
                 changeBy++;
 
-            setUpvoted(!upvoted);
-            setDownvoted(false);
+            setVotesState((currState) => { return {
+                    upPressed: !currState.upPressed,
+                    downPressed: false,
+                    votes: currState.votes + changeBy
+                }});
         } else {
 
-            if (downvoted)
+            if (votesState.downPressed)
                 changeBy++;
-            else if (upvoted)
+            else if (votesState.upPressed)
                 changeBy -= 2;
             else
                 changeBy--;
 
-            setDownvoted(!downvoted);
-            setUpvoted(false);
+            setVotesState((currState) => { return {
+                upPressed: false,
+                downPressed: !currState.downPressed,
+                votes: currState.votes + changeBy
+            }});
         }
 
-        setVotes(votes + changeBy);
+        patchVote(article.article_id, changeBy)
+            .then(() => setRequestStatus('success'))
+            .catch(() => setRequestStatus('error'));
     }
 
 
@@ -51,9 +82,11 @@ const Article = ({api, article, thumbnail}) => {
             <p className={`${cssClass}__author`}>posted by: {article.author}</p>
             <p className={`${cssClass}__comment-count`}>Comments: {article.comment_count}</p>
             <div className={`${cssClass}__votes`}>
-                <button className={`article-${upvoted?"":"-not"}-voted`} hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(true)}>↑</button>
-                <p className={`${cssClass}__votes`}>votes: {votes}</p>
-                <button className={`article-${downvoted?"":"-not"}-voted`} hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(false)}>↓</button>
+                <button className={`article-${votesState.upPressed?"":"-not"}-voted`} 
+                hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(true)}>↑</button>
+                <p className={`${cssClass}__votes`}>votes: {votesState.votes}</p>
+                <button className={`article-${votesState.downPressed?"":"-not"}-voted`} 
+                hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(false)}>↓</button>
             </div>
         </section>
     )
