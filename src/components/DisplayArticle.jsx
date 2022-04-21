@@ -7,21 +7,23 @@ import AddComment from "./AddComment";
 
 const DisplayArticle = ({user}) => {
 
+    const commentsLimit = 5;
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
     const [comments, setComments] = useState([]);
     const [requestStatus, setRequestStatus] = useState(null);
     const [savedComments, setSavedComments] = useState([]); 
+    const [toDisplay, setToDisplay] = useState(commentsLimit);
     
     useEffect(() => {
         getArticleById(article_id)
             .then(article => setArticle(article));
-        getArticleComments(article_id)
+        getArticleComments(article_id, toDisplay)
             .then(comments => {
                 setComments(comments);
                 setSavedComments(comments);
             });
-    }, []); 
+    }, [toDisplay]); 
 
     // if request failed, reinstate comments before
     // request was made, otherwise save current comments
@@ -85,6 +87,8 @@ const DisplayArticle = ({user}) => {
             <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
             {comments.map(comment => <Comment key={comment.comment_id} 
             comment={comment} user={user} deleteComment={onDeleteComment}/>)}
+            {toDisplay < article.comment_count &&
+             <button onClick={() => setToDisplay(toDisplay+commentsLimit)}>More Comments</button>}
         </main>
     );
 }

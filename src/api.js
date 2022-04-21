@@ -31,9 +31,9 @@ export const patchArticleVote = (articleId, changeBy) => {
     return api.patch(`/articles/${articleId}`, {inc_votes: changeBy});
 }
 
-export const getArticleComments = (articleId) => {
+export const getArticleComments = (articleId, limit) => {
 
-    return api.get(`/articles/${articleId}/comments`)
+    return api.get(`/articles/${articleId}/comments?limit=${limit}`)
         .then(res => res.data.comments);
 }
 
