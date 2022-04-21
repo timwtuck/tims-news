@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getArticles } from '../api';
 
 const DisplayArticles = ({query}) => {
-
+  
     const articlesLimit = 5;
     const [articles, setArticles] = useState([]);
     const [totalCount, setTotalCount] = useState(0);

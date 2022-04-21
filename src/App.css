@@ -59,6 +59,7 @@
     'title author'
     'content content'
     'comments votes';
+  color:black;
 }
 
 .article-thumbnail__body {
