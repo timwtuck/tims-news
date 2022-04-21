@@ -1,20 +1,19 @@
 import {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
 import DisplayArticles from "./DisplayArticles";
 import SearchBar from "./SearchBar";
 
 const Articles = () => {
 
-    const [query, setQuery] = useState({
-        topic:'',
-        order:'desc',
-        sortBy:'votes'
-    });
-    const [articles, setArticles] = useState([]);
+    const search = useLocation().search;
+    const query = {};
+    query.topic = new URLSearchParams(search).get('topic') || '';
+    query.order = new URLSearchParams(search).get('order') || 'desc';
+    query.sortBy = new URLSearchParams(search).get('sort_by') || 'votes';
   
-
     return (
         <main>
-            <SearchBar setQuery={setQuery}/>
+            <SearchBar/>
             <DisplayArticles query={query}/>
         </main>
     );

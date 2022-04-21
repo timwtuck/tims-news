@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getTopics } from '../api';
 
 const DropDown = ({children, setState, id}) => {
@@ -14,11 +15,12 @@ const DropDown = ({children, setState, id}) => {
     );
 }
 
-const SearchBar = ({setQuery}) => { 
+const SearchBar = () => { 
 
     const [topics, setTopics] = useState([{slug:''}]);
     const [selectedTopic, setSelectedTopic] = useState('');
     const [selectedSortBy, setSelectedSortBy] = useState('Newest');
+    let navigate = useNavigate();
 
     useEffect(() => {
         getTopics()
@@ -29,12 +31,13 @@ const SearchBar = ({setQuery}) => {
 
         e.preventDefault();
 
-        const query ={};
-        query.topic = selectedTopic;
-        query.order = selectedSortBy === 'Newest' ? 'asc' : 'desc';
-        query.sortBy = selectedSortBy === 'Hottest' ? 'votes' : 'created_at';
+        const order = selectedSortBy === 'Newest' ? 'asc' : 'desc';
+        const sortBy = selectedSortBy === 'Hottest' ? 'votes' : 'created_at';
         
-        setQuery(query);
+        let path = `/articles?sort_by=${sortBy}&order=${order}`;
+        path += selectedTopic ? `&topic=${selectedTopic}` : '';
+
+        navigate(path);
     }
 
     return (
