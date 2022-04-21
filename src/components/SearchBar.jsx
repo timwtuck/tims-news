@@ -15,7 +15,7 @@ const DropDown = ({children, setState, id}) => {
     );
 }
 
-const SearchBar = () => { 
+const SearchBar = ({setSearchParams}) => { 
 
     const [topics, setTopics] = useState([{slug:''}]);
     const [selectedTopic, setSelectedTopic] = useState('');
@@ -47,9 +47,9 @@ const SearchBar = () => {
                     <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
             </DropDown>
             <DropDown setState={setSelectedSortBy} id="sort-by">
+               <option>Hottest</option>
                <option>Newest</option>
                <option>Oldest</option>
-               <option>Hottest</option>
             </DropDown>
             <button>Search</button>
         </form>
