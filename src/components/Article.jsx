@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import { patchVote } from '../api';
 
 const Article = ({api, article, thumbnail}) => {
 
@@ -41,6 +42,7 @@ const Article = ({api, article, thumbnail}) => {
         }
 
         setVotes(votes + changeBy);
+        patchVote(article.article_id, changeBy);
     }
 
 
@@ -51,9 +53,11 @@ const Article = ({api, article, thumbnail}) => {
             <p className={`${cssClass}__author`}>posted by: {article.author}</p>
             <p className={`${cssClass}__comment-count`}>Comments: {article.comment_count}</p>
             <div className={`${cssClass}__votes`}>
-                <button className={`article-${upvoted?"":"-not"}-voted`} hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(true)}>↑</button>
+                <button className={`article-${upvoted?"":"-not"}-voted`} 
+                hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(true)}>↑</button>
                 <p className={`${cssClass}__votes`}>votes: {votes}</p>
-                <button className={`article-${downvoted?"":"-not"}-voted`} hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(false)}>↓</button>
+                <button className={`article-${downvoted?"":"-not"}-voted`} 
+                hidden={thumbnail?"hidden":""} onClick={() => onChangeVote(false)}>↓</button>
             </div>
         </section>
     )
