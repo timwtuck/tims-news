@@ -1,19 +1,9 @@
 import { useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
-import { getArticleById, getArticleComments, deleteComment } from "../api";
+import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
 import Article from './Article';
 import Comment from "./Comment";
-
-const AddComment = () => {
-
-    return (
-        <section className="add-comment">
-            <p>Add Comment: </p>
-            <textarea></textarea>
-            <button>Post Comment</button>
-        </section>  
-    )
-}
+import AddComment from "./AddComment";
 
 const DisplayArticle = ({user}) => {
 
@@ -29,7 +19,7 @@ const DisplayArticle = ({user}) => {
         getArticleComments(article_id)
             .then(comments => {
                 setComments(comments);
-                setSavedComments(comments)
+                setSavedComments(comments);
             });
     }, []); 
 
@@ -48,13 +38,36 @@ const DisplayArticle = ({user}) => {
         setRequestStatus(null);
     }, [requestStatus]);
 
+    function onPostComment(text){
+
+        const newComment = {
+            comment_id: 'temp',
+            author: user,
+            body: text,
+            votes: 0           
+        };
+
+        setComments([newComment, ...comments]);
+        
+        // post to backend  
+        postComment(article_id, {username: user, body: text})
+            .then(comment => {
+                setComments([comment, ...savedComments]);
+                setRequestStatus('success');
+            })
+            .catch(() => {
+                alert('Something went wrong, please try again');
+                setRequestStatus('error');
+            });
+    }
+
     function onDeleteComment(commentId) {
 
         const newComments = comments.filter(
             comment => comment.comment_id != commentId);
 
         setComments(newComments);
-        
+
         deleteComment(commentId)
             .then(() => setRequestStatus('success'))
             .catch(() => {
@@ -66,7 +79,7 @@ const DisplayArticle = ({user}) => {
     return (
         <main>
             <Article article={article} thumbnail={false}/>
-            <AddComment/>
+            <AddComment user={user} onPostComment={onPostComment}/>
             <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
             {comments.map(comment => <Comment key={comment.comment_id} 
             comment={comment} user={user} deleteComment={onDeleteComment}/>)}

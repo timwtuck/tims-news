@@ -43,6 +43,12 @@ export const getUsers = () => {
         .then(res => res.data.users);
 }
 
+export const postComment = (articleId, comment) => {
+
+    return api.post(`/articles/${articleId}/comments`, comment)
+        .then(res => res.data.comment);
+}
+
 export const deleteComment = (commentId) => {
 
     return api.delete(`/comments/${commentId}`);
