@@ -35,6 +35,7 @@ const DisplayArticles = ({query}) => {
                 <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
                     <Article 
                         cssClass="article-thumbnail" article={article} thumbnail={true}/>
+
                 </Link>)}
 
             <button hidden={toDisplay >= totalCount ? "hidden" : ""} 

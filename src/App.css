@@ -43,6 +43,7 @@
 /*---------------------------------------------------------*/
 /* DisplayArticles  (multiple)                             */
 
+
 .article__link {
   text-decoration: none;
   color: black;
@@ -126,6 +127,7 @@
 }
 
 .article__votes {
+
   grid-area: votes;
   text-align: right;
   padding-right: 10px;
@@ -139,7 +141,7 @@
   padding-left: 5px;
 }
 
-.article__comment-count {
+.article-thumbnail__comment-count {
   grid-area: comments;
   text-align: left;
   padding-left: 10px;
