@@ -1,38 +1,26 @@
 import {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom'
+import Article from './Article';
+import { Link } from 'react-router-dom';
+import { getArticles } from '../api';
 
-const Article = ({article}) => {
-
-    return (
-        <Link className="article__link" to={`/article/${article.article_id}`}>
-            <section className="article">
-                <h3>{article.title}</h3>
-                <p className="article__body">{article.body}</p>
-                <p className="article__author">posted by: {article.author}</p>
-                <p className="article__comment-count">Comments: {article.comment_count}</p>
-                <p className="article__votes">votes: {article.votes}</p>
-            </section>
-        </Link>
-    )
-}
-
-
-
-const DisplayArticles = ({api, query}) => {
-
+const DisplayArticles = ({query}) => {
+  
     const articlesLimit = 5;
     const [articles, setArticles] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [toDisplay, setToDisplay] = useState(articlesLimit);
     
     useEffect(() => {
+
+        // get the query path
         let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${toDisplay}`;
         path += query.topic ? `&topic=${query.topic}` : '';
 
-        api.get(path)
+        // grab the articles, and set states
+        getArticles(path)
             .then(res => {
-                setArticles(res.data.articles);
-                setTotalCount(res.data.total_count);
+                setArticles(res.articles);
+                setTotalCount(res.total_count);
             });
     }, [query, toDisplay]);
 
@@ -42,9 +30,16 @@ const DisplayArticles = ({api, query}) => {
 
     return (
         <section className="display-articles">
-            {articles.map(article => <Article key={article.article_id} article={article}/>)}
+
+            {articles.map(article => 
+                <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
+                    <Article 
+                        cssClass="article-thumbnail" article={article} thumbnail={true}/>
+                </Link>)}
+
             <button hidden={toDisplay >= totalCount ? "hidden" : ""} 
                 onClick={onDisplayMore}>Display More</button>
+
         </section>
     );
 }

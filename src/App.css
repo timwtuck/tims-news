@@ -41,18 +41,19 @@
 }
 
 /*---------------------------------------------------------*/
-/* Article                                                */
+/* DisplayArticles  (multiple)                             */
 
 .article__link {
   text-decoration: none;
+  color: black;
 }
 
-.article {
+.article-thumbnail {
   border: thin solid black;
   padding: 5px;
   margin:2px;
   display: grid;
-  grid-template-columns: auto 70px;;
+  grid-template-columns: auto 70px;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
     'title author'
@@ -61,7 +62,7 @@
   color:black;
 }
 
-.article__body {
+.article-thumbnail__body {
   grid-area: content;
   height: 150px;
   text-overflow: ellipsis;
@@ -70,19 +71,117 @@
   
 }
  
-.article__author {
+.article-thumbnail__author {
   grid-area: author;
   font-size: 0.8em;
 
 }
 
+.article-thumbnail__votes {
+  grid-area: votes;
+}
+
+.article-thumbnail__comment-count {
+  grid-area: comments;
+  text-align: left;
+  padding-left: 10px;
+}
+
+/*---------------------------------------------------------*/
+/* DisplayArticle (Single)                                 */
+
+.article {
+  border: thin solid black;
+  padding: 5px;
+  padding-bottom: 0px;;
+  margin: 2px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    'title title'
+    'author empty'
+    'content content'
+    'comments votes';
+}
+
+.article h3 {
+  grid-area:title;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.article__body {
+  grid-area: content;
+  padding-bottom: 0px;
+}
+
+.article__author {
+  grid-area: author;
+  font-size: 0.8em;
+  text-align: left;
+  padding-left: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
 .article__votes {
   grid-area: votes;
+  text-align: right;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
 
+.article__votes p {
+  display: inline;
+  color: blue;
+  padding-left: 5px;
 }
 
 .article__comment-count {
   grid-area: comments;
   text-align: left;
   padding-left: 10px;
+  padding-bottom:0px;
+}
+
+.article--voted {
+  color:crimson;
+  background-color: grey;
+}
+
+.article--not-voted {
+  color:rgb(97, 96, 96);
+  background-color: whitesmoke;
+}
+
+/*---------------------------------------------------------*/
+/* Add Comment                                             */
+
+.add-comment {
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-template-rows: min-content auto;
+  grid-template-areas: 
+    'label button'
+    'textbox textbox';
+  border: thin solid black;
+}
+
+.add-comment p {
+  grid-area: label;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.add-comment textarea {
+  grid-area: textbox;
+  margin: 10px;
+  min-height: 80px;
+}
+
+.add-comment button {
+  grid-area: button;
+  margin: 10px;
 }
