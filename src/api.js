@@ -25,3 +25,9 @@ export const getArticleById = (articleId) => {
     return api.get(`/articles/${articleId}`)
             .then(res => res.data.article);
 } 
+
+export const patchVote = (articleId, changeBy) => {
+
+    return api.patch(`/articles/${articleId}`, 
+        {'inc_votes': changeBy });
+}
