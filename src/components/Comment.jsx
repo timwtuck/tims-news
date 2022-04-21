@@ -1,6 +1,5 @@
 
-
-const Comment = ({comment}) => {
+const Comment = ({comment, user, deleteComment}) => {
 
     return (
         <section className="comment">
@@ -11,6 +10,8 @@ const Comment = ({comment}) => {
                 <p>votes: {comment.votes}</p>
                 <button>↓</button>
             </div>
+            {user===comment.author && <button className="comment__delete"
+                onClick={() => deleteComment(comment.comment_id)}>delete</button>}
         </section>
     )
 }

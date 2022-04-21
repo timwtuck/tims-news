@@ -9,17 +9,17 @@ import Account from './components/Account';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('tickle122');
 
   return (
     <div className="App">
-      <Header/>
+      <Header user={user}/>
       <Routes>
         <Route path='/' element={<Articles/>}></Route>
         <Route path='/login' element={<Login setUser={setUser}/>}></Route>
         <Route path='/account' element={<Account user={user}/>}/>
         <Route path='/articles' element={<Articles/>}></Route>
-        <Route path='/articles/:article_id' element={<DisplayArticle/>}></Route>
+        <Route path='/articles/:article_id' element={<DisplayArticle user={user}/>}></Route>
       </Routes>
     </div>
   );

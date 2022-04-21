@@ -42,3 +42,8 @@ export const getUsers = () => {
     return api.get('/users')
         .then(res => res.data.users);
 }
+
+export const deleteComment = (commentId) => {
+
+    return api.delete(`/comments/${commentId}`);
+}

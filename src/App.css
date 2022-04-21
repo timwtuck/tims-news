@@ -192,11 +192,11 @@
 .comment {
 
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto min-content;
   grid-template-rows: auto auto;
   grid-template-areas: 
-    'body body'
-    'author votes';
+    'body body delete'
+    'author votes votes';
     border: thin solid black;
     margin: 5px;
 }
@@ -223,6 +223,15 @@
 .comment__votes p {
   display:inline;
   padding: 5px;
+}
+
+.comment__delete {
+  grid-area: delete;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 25px;
+  background-color: crimson;
+  color: white;
 }
 
 /*---------------------------------------------------------*/
