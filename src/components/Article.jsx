@@ -13,7 +13,7 @@ const Article = ({api, article, thumbnail}) => {
             <p className={`${cssClass}__body`}>{article.body}</p>
             <p className={`${cssClass}__author`}>posted by: {article.author}</p>
             <p className={`${cssClass}__comment-count`}>Comments: {article.comment_count}</p>
-            {article.votes && <Votes cssClass={`${cssClass}__votes`} votes={article.votes} 
+            {article.votes !== undefined && <Votes cssClass={`${cssClass}__votes`} votes={article.votes} 
                 id={article.article_id} apiCall={patchArticleVote} hideButtons={thumbnail}/>}
         </section>
     )

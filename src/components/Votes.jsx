@@ -64,7 +64,7 @@ const Votes = ({hideButtons, cssClass, votes, id, apiCall}) => {
                 setRequestStatus('error');
             });
     }
-
+    console.log(cssClass)
     return (
 
         <div className={`${cssClass}`}>
