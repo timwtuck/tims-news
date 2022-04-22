@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import Article from './Article';
 import { Link } from 'react-router-dom';
 import { getArticles } from '../api';
-import { displayPageStatusFeedback } from '../utils';
+import { displayPageStatusFeedback, handleError } from '../utils';
 
 const DisplayArticles = ({query}) => {
   
@@ -30,7 +30,7 @@ const DisplayArticles = ({query}) => {
                 setTotalCount(res.totalCount);
                 setPageStatus('loaded')
             })
-        .catch(() => { setPageStatus('error')});
+        .catch((err) => handleError(err, setPageStatus));
     }, [query]);
        
     // loading pagination
@@ -64,7 +64,7 @@ const DisplayArticles = ({query}) => {
 
     return (
         <section className="display-articles">
-            {displayPageStatusFeedback(pageStatus)}
+            {displayPageStatusFeedback(pageStatus, 'Invalid Topic / Search Queries')}
             {pageStatus === 'loaded' &&
             articles.map(article => 
             <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>

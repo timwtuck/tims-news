@@ -4,7 +4,7 @@ import { getArticleById, getArticleComments, deleteComment, postComment } from "
 import Article from './Article';
 import Comment from "./Comment";
 import AddComment from "./AddComment";
-import { displayPageStatusFeedback } from "../utils";
+import { displayPageStatusFeedback, handleError } from "../utils";
 
 const DisplayArticle = ({user}) => {
 
@@ -35,7 +35,7 @@ const DisplayArticle = ({user}) => {
                 setComments(comments);
                 setSavedComments(comments);
             })
-            .catch((err) => setPageStatus('error'));
+            .catch((err) => handleError(err, setPageStatus));
     }, []); 
 
     // if request failed, reinstate comments before
@@ -127,7 +127,7 @@ const DisplayArticle = ({user}) => {
 
     return (
         <main>
-            {displayPageStatusFeedback(pageStatus)}
+            {displayPageStatusFeedback(pageStatus, 'Article Not Found')}
             {pageStatus === 'loaded' &&
                 <>
                     <Article article={article} thumbnail={false} commentCount={commentCount}/>
