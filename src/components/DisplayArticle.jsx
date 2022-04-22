@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import {useState, useEffect} from "react";
 import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
 import Article from './Article';
 import Comment from "./Comment";
 import AddComment from "./AddComment";
+import SearchBar from "./SearchBar";
 
 const DisplayArticle = ({user}) => {
 
@@ -16,6 +17,12 @@ const DisplayArticle = ({user}) => {
     const [savedCommentCount, setSavedCommentCount] = useState(0);
     const [toDisplay, setToDisplay] = useState(commentsLimit);
     const [commentCount, setCommentCount] = useState(0);
+
+    let [searchParams, setSearchParams] = useSearchParams();
+    const query = {};
+    query.topic = searchParams.get('topic') || '';
+    query.order = searchParams.get('order') || 'desc';
+    query.sortBy = searchParams.get('sort_by') || 'votes';
     
     useEffect(() => {
         getArticleById(article_id)
@@ -95,13 +102,16 @@ const DisplayArticle = ({user}) => {
 
     return (
         <main>
-            <Article article={article} thumbnail={false} commentCount={commentCount}/>
-            <AddComment user={user} onPostComment={onPostComment}/>
-            <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
-            {comments.map(comment => <Comment key={comment.comment_id} 
-            comment={comment} user={user} deleteComment={onDeleteComment}/>)}
-            {toDisplay < article.comment_count &&
-             <button onClick={() => setToDisplay(toDisplay+commentsLimit)}>More Comments</button>}
+            <SearchBar setSearchParams={setSearchParams}/>
+            <section className="display-page">
+                <Article article={article} thumbnail={false} commentCount={commentCount}/>
+                <AddComment user={user} onPostComment={onPostComment}/>
+                <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
+                {comments.map(comment => <Comment key={comment.comment_id} 
+                comment={comment} user={user} deleteComment={onDeleteComment}/>)}
+                {toDisplay < article.comment_count &&
+                <button onClick={() => setToDisplay(toDisplay+commentsLimit)}>More Comments</button>}
+             </section>
         </main>
     );
 }

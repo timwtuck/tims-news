@@ -14,7 +14,9 @@ const Articles = () => {
     return (
         <main>
             <SearchBar setSearchParams={setSearchParams}/>
-            <DisplayArticles query={query}/>
+            <section className="display-page">
+                <DisplayArticles query={query}/>
+            </section>
         </main>
     );
 

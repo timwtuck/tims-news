@@ -11,6 +11,17 @@
   text-align: center;
   font-family: 'Sarabun',
   sans-serif;
+  background-color: var(--colour-bg);
+}
+
+.display-page {
+  display: block;
+  margin: auto;
+  width: 90%;
+}
+
+.display-more-button {
+  
 }
 
 
@@ -67,6 +78,11 @@
   border: #FF533D;
 }
 
+.search-bar button {
+  border-radius: 5px;
+  padding: 5px;
+}
+
 /*---------------------------------------------------------*/
 /* DisplayArticles  (multiple)                             */
 
@@ -79,9 +95,9 @@
   border: thin solid var(--colour-main);
   border-radius:5px;
   padding: 5px;
-  margin:2px;
+  margin:5px;
   display: grid;
-  grid-template-columns: auto 70px;
+  grid-template-columns: auto min-content;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
     'title author'
@@ -103,13 +119,12 @@
   text-overflow: ellipsis;
   overflow:hidden;
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%)
-  
 }
  
 .article-thumbnail__author {
   grid-area: author;
   font-size: 0.8em;
-
+  min-width: 100px;
 }
 
 .article-thumbnail__votes {
@@ -128,10 +143,11 @@
 /* DisplayArticle (Single)                                 */
 
 .article {
-  border: thin solid black;
+  border: 0.2em solid var(--colour-main);
+  border-radius: 5px;
   padding: 5px;
   padding-bottom: 0px;;
-  margin: 2px;
+  margin: 10px;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto auto;
@@ -146,11 +162,16 @@
   grid-area:title;
   padding-bottom: 0px;
   margin-bottom: 0px;
+  border-bottom: thick solid var(--colour-sub2);
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 10px;
 }
 
 .article__body {
   grid-area: content;
   padding-bottom: 0px;
+  text-align: left;;
 }
 
 .article__author {
@@ -158,7 +179,7 @@
   font-size: 0.8em;
   text-align: left;
   padding-left: 5px;
-  padding-top: 0px;
+  padding-top: 5px;
   margin-top: 0px;
 }
 
@@ -168,13 +189,18 @@
   padding-right: 10px;
   padding-bottom: 0px;
   margin-bottom: 0px;
+  font-weight: bold;
+  
 }
 
 .article__votes p {
   display: inline;
-  color: blue;
-  padding-left: 5px;
-  padding-right: 5px;
+  color: var(--colour-main);
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: bold;
+  height: 50px;
+  bottom: 0;
 }
 
 .article__comment-count {
@@ -182,16 +208,7 @@
   text-align: left;
   padding-left: 10px;
   padding-bottom:0px;
-}
-
-.article--voted {
-  color:crimson;
-  background-color: grey;
-}
-
-.article--not-voted {
-  color:rgb(97, 96, 96);
-  background-color: whitesmoke;
+  font-weight: bold;
 }
 
 /*---------------------------------------------------------*/
@@ -204,13 +221,16 @@
   grid-template-areas: 
     'label button'
     'textbox textbox';
-  border: thin solid black;
+  border-radius: 5px;
+  margin: 5px;
 }
 
 .add-comment p {
   grid-area: label;
   text-align: left;
   padding-left: 10px;
+  font-size: large;
+  font-weight: bold;
 }
 
 .add-comment textarea {
@@ -222,11 +242,15 @@
 .add-comment button {
   grid-area: button;
   margin: 10px;
+  border: thin solid grey;
+  border-radius: 5px;
+
 }
 
 .add-comment__button--enabled {
 
-  background-color: rgb(151, 148, 148);
+  background-color: rgb(189, 183, 183);
+  color: var(--colour-main);
 }
 
 .add-comment__button--disabled {
@@ -239,13 +263,21 @@
 /* Votes                                                */
 
 .voted {
-  color:crimson;
-  background-color: grey;
+  color: var(--colour-sub2);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: x-large;
+  height: 50px;
 }
 
 .not-voted {
   color:rgb(97, 96, 96);
-  background-color: whitesmoke;
+  background-color: transparent;
+  border:none;
+  outline: none;
+  font-size: large;
+  height: 50px;
 }
 
 /*---------------------------------------------------------*/
@@ -260,6 +292,7 @@
     'body body delete'
     'author votes votes';
     border: thin solid black;
+    border-radius: 5px;
     margin: 5px;
 }
 
@@ -291,9 +324,11 @@
   grid-area: delete;
   margin-top: 10px;
   margin-right: 10px;
-  height: 25px;
-  background-color: crimson;
+  height: 20px;
+  background-color: var(--colour-sub2);
   color: white;
+  font-weight: bold;
+  border: thin solid var(--colour-main);
 }
 
 /*---------------------------------------------------------*/
