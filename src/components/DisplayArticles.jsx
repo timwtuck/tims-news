@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import Article from './Article';
 import { Link } from 'react-router-dom';
 import { getArticles } from '../api';
+import { displayPageStatusFeedback } from '../utils';
 
 const DisplayArticles = ({query}) => {
   
@@ -53,21 +54,6 @@ const DisplayArticles = ({query}) => {
         });
     }
 
-    function displayPage() {
-
-        if (pageStatus === "loading")
-            return <h2>Page Loading...</h2>;
-        
-        if (pageStatus === "error")
-            return <h2>Something went wrong, please refresh page</h2>;
-
-        return articles.map(article => 
-                <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
-                    <Article 
-                        cssClass="article-thumbnail" article={article} thumbnail={true}/>
-                </Link>)
-    }
-
     function displayButton() {
 
         if ((page*articlesLimit) < totalCount && pageStatus === "loaded"){
@@ -78,7 +64,14 @@ const DisplayArticles = ({query}) => {
 
     return (
         <section className="display-articles">
-            {displayPage()}
+            {displayPageStatusFeedback(pageStatus)}
+            {pageStatus === 'loaded' &&
+            articles.map(article => 
+            <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
+                <Article 
+                    cssClass="article-thumbnail" article={article} thumbnail={true}/>
+            </Link>)
+            }
             {displayButton()}
         </section>
     );
