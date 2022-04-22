@@ -6,6 +6,7 @@ import Header from './components/Header';
 import DisplayArticle from './components/DisplayArticle';
 import Login from './components/Login';
 import Account from './components/Account';
+import {displayPageStatusFeedback} from './utils';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/account' element={<Account user={user}/>}/>
         <Route path='/articles' element={<Articles/>}></Route>
         <Route path='/articles/:article_id' element={<DisplayArticle user={user}/>}></Route>
+        <Route path='*' element={displayPageStatusFeedback('not found', 'Error: 404\nPage Not Found')}/>
       </Routes>
     </div>
   );
