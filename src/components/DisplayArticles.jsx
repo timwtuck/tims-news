@@ -64,7 +64,7 @@ const DisplayArticles = ({query}) => {
 
     return (
         <section className="display-articles">
-            {displayPageStatusFeedback(pageStatus, 'Invalid Topic / Search Queries')}
+            {displayPageStatusFeedback(pageStatus, 'Topic Not Found')}
             {pageStatus === 'loaded' &&
             articles.map(article => 
             <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
