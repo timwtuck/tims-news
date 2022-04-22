@@ -15,13 +15,14 @@ const DisplayArticle = ({user}) => {
     const [requestStatus, setRequestStatus] = useState(null);
     const [savedComments, setSavedComments] = useState([]); 
     const [savedCommentCount, setSavedCommentCount] = useState(0);
-    const [toDisplay, setToDisplay] = useState(commentsLimit);
     const [commentCount, setCommentCount] = useState(0);
     const [pageStatus, setPageStatus] = useState('loading');
+    const [commentPage, setCommentPage] = useState(1);
+    const [loadMoreStatus, setLoadMoreStatus] = useState('idle');
     
     useEffect(() => {
         const getArticle = getArticleById(article_id);
-        const getComments = getArticleComments(article_id, toDisplay);
+        const getComments = getArticleComments(article_id, commentsLimit, commentPage);
 
         Promise.all([getArticle, getComments])
             .then(([article, comments]) =>{
@@ -35,7 +36,7 @@ const DisplayArticle = ({user}) => {
                 setSavedComments(comments);
             })
             .catch((err) => setPageStatus('error'));
-    }, [toDisplay]); 
+    }, []); 
 
     // if request failed, reinstate comments before
     // request was made, otherwise save current comments
@@ -98,6 +99,32 @@ const DisplayArticle = ({user}) => {
             });
     }
 
+    // loading comment pagination
+    function onDisplayMore(e) {
+
+        setCommentPage(commentPage + 1);
+        setLoadMoreStatus('loading');
+
+        getArticleComments(article_id, commentsLimit, commentPage + 1)
+            .then(newComments => {
+                setComments([...comments, ...newComments]);
+                setLoadMoreStatus('idle')
+            })
+        .catch(() => {
+                alert('Could not load more comments, please try again');
+                setLoadMoreStatus('idle');
+                setCommentPage(commentPage - 1);
+        });
+    }
+
+    function displayButton() {
+
+        if ((commentPage*commentsLimit) < commentCount && pageStatus === "loaded"){
+            const buttonText = loadMoreStatus === 'idle' ? "Display More" : "Loading...";
+            return <button onClick={onDisplayMore}>{buttonText}</button>;
+        }
+    }
+
     return (
         <main>
             {displayPageStatusFeedback(pageStatus)}
@@ -108,8 +135,7 @@ const DisplayArticle = ({user}) => {
                     <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
                     {comments.map(comment => <Comment key={comment.comment_id} 
                     comment={comment} user={user} deleteComment={onDeleteComment}/>)}
-                    {toDisplay < article.comment_count &&
-                    <button onClick={() => setToDisplay(toDisplay+commentsLimit)}>More Comments</button>}
+                    {displayButton()}
                 </>
             }
         </main>
