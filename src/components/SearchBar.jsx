@@ -31,9 +31,11 @@ const SearchBar = ({setSearchParams}) => {
 
         e.preventDefault();
 
-        const order = selectedSortBy === 'Newest' ? 'asc' : 'desc';
-        const sortBy = selectedSortBy === 'Hottest' ? 'votes' : 'created_at';
+        const order = /(Newest|Least Comments)/.test(selectedSortBy) ? 'asc' : 'desc';
+        const sortBy = selectedSortBy === 'Hottest' ? 'votes' : 
+            /Comments/.test(selectedSortBy) ? 'comment_count' : 'created_at';
         
+            console.log(order, sortBy)
         let path = `/articles?sort_by=${sortBy}&order=${order}`;
         path += selectedTopic ? `&topic=${selectedTopic}` : '';
 
@@ -50,6 +52,8 @@ const SearchBar = ({setSearchParams}) => {
                <option>Hottest</option>
                <option>Newest</option>
                <option>Oldest</option>
+               <option>Most Comments</option>
+               <option>Least Comments</option>
             </DropDown>
             <button>Search</button>
         </form>
