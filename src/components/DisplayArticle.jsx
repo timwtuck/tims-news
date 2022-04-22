@@ -13,11 +13,18 @@ const DisplayArticle = ({user}) => {
     const [comments, setComments] = useState([]);
     const [requestStatus, setRequestStatus] = useState(null);
     const [savedComments, setSavedComments] = useState([]); 
+    const [savedCommentCount, setSavedCommentCount] = useState(0);
     const [toDisplay, setToDisplay] = useState(commentsLimit);
+    const [commentCount, setCommentCount] = useState(0);
     
     useEffect(() => {
         getArticleById(article_id)
-            .then(article => setArticle(article));
+            .then(article => {
+                setArticle(article);
+                setCommentCount(article.comment_count);
+                setSavedCommentCount(article.comment_count);
+            });
+
         getArticleComments(article_id, toDisplay)
             .then(comments => {
                 setComments(comments);
@@ -32,10 +39,14 @@ const DisplayArticle = ({user}) => {
         if (!requestStatus)
             return;
 
-        if (requestStatus == 'error')
+        if (requestStatus == 'error'){
             setComments(savedComments);
-        else
+            setCommentCount(savedCommentCount);
+        }
+        else {
             setSavedComments(comments);
+            setSavedCommentCount(commentCount);
+        }
         
         setRequestStatus(null);
     }, [requestStatus]);
@@ -50,6 +61,7 @@ const DisplayArticle = ({user}) => {
         };
 
         setComments([newComment, ...comments]);
+        setCommentCount((curr) => curr + 1);
         
         // post to backend  
         postComment(article_id, {username: user, body: text})
@@ -71,6 +83,7 @@ const DisplayArticle = ({user}) => {
             comment => comment.comment_id != commentId);
 
         setComments(newComments);
+        setCommentCount((curr) => curr - 1);
 
         deleteComment(commentId)
             .then(() => setRequestStatus('success'))
@@ -82,7 +95,7 @@ const DisplayArticle = ({user}) => {
 
     return (
         <main>
-            <Article article={article} thumbnail={false}/>
+            <Article article={article} thumbnail={false} commentCount={commentCount}/>
             <AddComment user={user} onPostComment={onPostComment}/>
             <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
             {comments.map(comment => <Comment key={comment.comment_id} 

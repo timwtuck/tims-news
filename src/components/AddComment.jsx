@@ -5,12 +5,22 @@ const AddComment = ({user, onPostComment}) => {
 
     const [text, setText] = useState('');
 
+    function postComment() {
+
+        if (!text)
+            return;
+
+        onPostComment(text, setText);
+        setText('')
+    }
+
     return (
         <section className="add-comment">
             <p>Add Comment: </p>
             <textarea value={text} 
                 onChange={(e) => setText(e.target.value)}/>
-            <button onClick={() => {onPostComment(text, setText); setText('')}}>Post Comment</button>
+            <button className={`add-comment__button--${text?'enabled':'disabled'}`}
+                onClick={postComment}>Post Comment</button>
         </section>  
     )
 }
