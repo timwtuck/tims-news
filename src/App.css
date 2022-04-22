@@ -110,6 +110,12 @@
     'comments votes';
 }
 
+.article__back {
+  grid-area: title;
+  width: 60px;
+  height: 30px;
+}
+
 .article h3 {
   grid-area:title;
   padding-bottom: 0px;

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
 import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
 import Article from './Article';
@@ -6,9 +6,12 @@ import Comment from "./Comment";
 import AddComment from "./AddComment";
 import { displayPageStatusFeedback, handleError } from "../utils";
 
+
 const DisplayArticle = ({user}) => {
 
     const commentsLimit = 5;
+    const navigate = useNavigate();
+    
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
     const [comments, setComments] = useState([]);
@@ -19,6 +22,7 @@ const DisplayArticle = ({user}) => {
     const [pageStatus, setPageStatus] = useState('loading');
     const [commentPage, setCommentPage] = useState(1);
     const [loadMoreStatus, setLoadMoreStatus] = useState('idle');
+    
     
     useEffect(() => {
         const getArticle = getArticleById(article_id);
