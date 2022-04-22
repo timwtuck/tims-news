@@ -8,27 +8,49 @@ const DisplayArticles = ({query}) => {
     const articlesLimit = 5;
     const [articles, setArticles] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
-    const [toDisplay, setToDisplay] = useState(articlesLimit);
-    const [pageStatus, setPageStatus] = useState('loading')
+    const [page, setPage] = useState(1);
+    const [pageStatus, setPageStatus] = useState('loading');
+    const [loadMoreStatus, setLoadMoreStatus] = useState('idle');
     
+    // initial loading of articles
     useEffect(() => {
 
+        setPageStatus('loading');
+        setPage(1);
+
         // get the query path
-        let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${toDisplay}`;
+        let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${articlesLimit}`;
         path += query.topic ? `&topic=${query.topic}` : '';
 
         // grab the articles, and set states
         getArticles(path)
             .then(res => {
                 setArticles(res.articles);
-                setTotalCount(res.total_count);
+                setTotalCount(res.totalCount);
                 setPageStatus('loaded')
             })
-            .catch(() => setPageStatus('error'));
-    }, [query, toDisplay]);
-
+        .catch(() => { setPageStatus('error')});
+    }, [query]);
+       
+    // loading pagination
     function onDisplayMore(e) {
-        setToDisplay(toDisplay + articlesLimit);
+
+        setPage(page + 1);
+        setLoadMoreStatus('loading');
+
+        let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${articlesLimit}&p=${page+1}`;
+        path += query.topic ? `&topic=${query.topic}` : '';
+
+        getArticles(path)
+            .then(res => {
+                setArticles([...articles, ...res.articles]);
+                setLoadMoreStatus('idle')
+            })
+        .catch(() => {
+                alert('Could not load more articles, please try again');
+                setLoadMoreStatus('idle');
+                setPage(page - 1);
+        });
     }
 
     function displayPage() {
@@ -46,12 +68,18 @@ const DisplayArticles = ({query}) => {
                 </Link>)
     }
 
+    function displayButton() {
+
+        if ((page*articlesLimit) < totalCount && pageStatus === "loaded"){
+            const buttonText = loadMoreStatus === 'idle' ? "Display More" : "Loading...";
+            return <button onClick={onDisplayMore}>{buttonText}</button>;
+        }
+    }
+
     return (
         <section className="display-articles">
             {displayPage()}
-            <button hidden={toDisplay >= totalCount ? "hidden" : ""} 
-                onClick={onDisplayMore}>Display More</button>
-
+            {displayButton()}
         </section>
     );
 }
