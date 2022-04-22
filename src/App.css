@@ -21,6 +21,11 @@
   margin: 10px;
 }
 
+.header__account {
+  display: flex;
+  color: blue;
+}
+
 
 /*---------------------------------------------------------*/
 /* Search Bar                                              */
@@ -137,6 +142,7 @@
   display: inline;
   color: blue;
   padding-left: 5px;
+  padding-right: 5px;
 }
 
 .article__comment-count {
@@ -186,17 +192,41 @@
   margin: 10px;
 }
 
+.add-comment__button--enabled {
+
+  background-color: rgb(151, 148, 148);
+}
+
+.add-comment__button--disabled {
+  
+    background-color: white;
+    color:rgb(151, 148, 148)
+}
+
+/*---------------------------------------------------------*/
+/* Votes                                                */
+
+.voted {
+  color:crimson;
+  background-color: grey;
+}
+
+.not-voted {
+  color:rgb(97, 96, 96);
+  background-color: whitesmoke;
+}
+
 /*---------------------------------------------------------*/
 /* Comments                                                */
 
 .comment {
 
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto min-content;
   grid-template-rows: auto auto;
   grid-template-areas: 
-    'body body'
-    'author votes';
+    'body body delete'
+    'author votes votes';
     border: thin solid black;
     margin: 5px;
 }
@@ -224,3 +254,73 @@
   display:inline;
   padding: 5px;
 }
+
+.comment__delete {
+  grid-area: delete;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 25px;
+  background-color: crimson;
+  color: white;
+}
+
+/*---------------------------------------------------------*/
+/* Login                                                   */
+
+.login__main {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+
+.login__form {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: auto auto min-content min-content;
+  grid-template-areas: 
+    'username-label username'
+    'password-label password'
+    'button button'
+    'error error';
+    border: thin solid black;
+    width: 600px;
+}
+
+.login__form label {
+  padding: 10px;
+}
+
+.login__form input {
+  margin: 10px;
+  padding: 10px;
+}
+
+/* .login__form-username-label {
+  grid-area: username-label;
+}
+
+.login__form-username {
+  grid-area: username;
+}
+
+.login__form-password-label {
+  grid-area:password-label;
+}
+
+.login__form-password {
+  grid-area: password;
+}
+*/
+
+.login__form button {
+  grid-area: button;
+  width:60px;
+  margin-left: 20px;
+  text-align: center;
+} 
+
+.login__form-error {
+  grid-area: error;
+  height: 20px;
+} 
+

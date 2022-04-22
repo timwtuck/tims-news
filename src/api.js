@@ -26,8 +26,35 @@ export const getArticleById = (articleId) => {
             .then(res => res.data.article);
 } 
 
-export const getArticleComments = (articleId) => {
+export const patchArticleVote = (articleId, changeBy) => {
 
-    return api.get(`/articles/${articleId}/comments`)
+    return api.patch(`/articles/${articleId}`, {inc_votes: changeBy});
+}
+
+export const getArticleComments = (articleId, limit) => {
+
+    return api.get(`/articles/${articleId}/comments?limit=${limit}`)
         .then(res => res.data.comments);
+}
+
+export const getUsers = () => {
+
+    return api.get('/users')
+        .then(res => res.data.users);
+}
+
+export const postComment = (articleId, comment) => {
+
+    return api.post(`/articles/${articleId}/comments`, comment)
+        .then(res => res.data.comment);
+}
+
+export const deleteComment = (commentId) => {
+
+    return api.delete(`/comments/${commentId}`);
+}
+
+export const patchCommentVote = (commentId, changeBy) => {
+
+    return api.patch(`/comments/${commentId}`, {inc_votes: changeBy});
 }
