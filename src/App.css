@@ -1,6 +1,18 @@
+/*---------------------------------------------------------*/
+/* Generic Styling                                        */
+:root {
+  --colour-main: #0F1626;
+  --colour-sub1: #AB987A;
+  --colour-sub2: #FF533D;
+  --colour-bg: #F5F5F5;
+}
+
 .App {
   text-align: center;
+  font-family: 'Sarabun',
+  sans-serif;
 }
+
 
 /*---------------------------------------------------------*/
 /* Header                                                   */
@@ -9,12 +21,17 @@
   display:grid;
   grid-template-columns: auto min-content;
   grid-area: title account;
-  border: thin solid black;
+  background-color: var(--colour-bg);
 }
 
 .header h1 {
   text-align: left;
   margin: 10px;
+  margin-left: 30px;
+  color: var(--colour-main);
+  font-family: 'Square Peg', cursive;
+  letter-spacing: 0.5em;
+  font-size: 2em;
 }
 
 .header a {
@@ -37,12 +54,17 @@
   border: thin solid black;
   margin-top: 3px;
   padding: 3px;
+  padding-left: 10px;
+  background-color: var(--colour-sub1);
+  font-weight: bold;
+  justify-content: left;
 }
 
 .search-bar select {
   margin-right: 10px;
   margin-left: 2px;
   padding: 3px;
+  border: #FF533D;
 }
 
 /*---------------------------------------------------------*/
@@ -50,11 +72,12 @@
 
 .article__link {
   text-decoration: none;
-  color: black;
+  color: var(--colour-main);
 }
 
 .article-thumbnail {
-  border: thin solid black;
+  border: thin solid var(--colour-main);
+  border-radius:5px;
   padding: 5px;
   margin:2px;
   display: grid;
@@ -64,7 +87,14 @@
     'title author'
     'content content'
     'comments votes';
-  color:black;
+    background-color: var(--colour-bg);
+}
+
+.article-thumbnail h3 {
+  padding-bottom: 5px;
+  border-bottom: thick solid var(--colour-sub2);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .article-thumbnail__body {
@@ -84,12 +114,14 @@
 
 .article-thumbnail__votes {
   grid-area: votes;
+  font-weight: bold;
 }
 
 .article-thumbnail__comment-count {
   grid-area: comments;
   text-align: left;
   padding-left: 10px;
+  font-weight: bold;
 }
 
 /*---------------------------------------------------------*/
