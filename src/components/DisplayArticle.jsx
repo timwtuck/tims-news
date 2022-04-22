@@ -1,6 +1,5 @@
 
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import { useParams,  } from "react-router-dom";
 import {useState, useEffect} from "react";
 import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
 import Article from './Article';
