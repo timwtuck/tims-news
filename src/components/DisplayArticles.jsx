@@ -9,6 +9,7 @@ const DisplayArticles = ({query}) => {
     const [articles, setArticles] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [toDisplay, setToDisplay] = useState(articlesLimit);
+    const [pageStatus, setPageStatus] = useState('loading')
     
     useEffect(() => {
 
@@ -21,22 +22,33 @@ const DisplayArticles = ({query}) => {
             .then(res => {
                 setArticles(res.articles);
                 setTotalCount(res.total_count);
-            });
+                setPageStatus('loaded')
+            })
+            .catch(() => setPageStatus('error'));
     }, [query, toDisplay]);
 
     function onDisplayMore(e) {
         setToDisplay(toDisplay + articlesLimit);
     }
 
-    return (
-        <section className="display-articles">
+    function displayPage() {
 
-            {articles.map(article => 
+        if (pageStatus === "loading")
+            return <h2>Page Loading...</h2>;
+        
+        if (pageStatus === "error")
+            return <h2>Something went wrong, please refresh page</h2>;
+
+        return articles.map(article => 
                 <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
                     <Article 
                         cssClass="article-thumbnail" article={article} thumbnail={true}/>
-                </Link>)}
+                </Link>)
+    }
 
+    return (
+        <section className="display-articles">
+            {displayPage()}
             <button hidden={toDisplay >= totalCount ? "hidden" : ""} 
                 onClick={onDisplayMore}>Display More</button>
 
