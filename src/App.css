@@ -318,6 +318,13 @@ button:hover {
 /*---------------------------------------------------------*/
 /* Comments                                                */
 
+.comment-label {
+  text-align: left;
+  padding-left: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
 .comment {
 
   display: grid;

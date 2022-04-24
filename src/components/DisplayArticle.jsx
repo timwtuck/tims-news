@@ -144,7 +144,7 @@ const DisplayArticle = ({user}) => {
                     <section className="display-page">
                         <Article article={article} thumbnail={false} commentCount={commentCount}/>
                         <AddComment user={user} onPostComment={onPostComment}/>
-                        <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
+                        <p className="comment-label">{comments.length ? 'Comments: ' : 'No Comments'}</p>
                         {comments.map(comment => <Comment key={comment.comment_id} 
                         comment={comment} user={user} deleteComment={onDeleteComment}/>)}
                         {displayButton()}
