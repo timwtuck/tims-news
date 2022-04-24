@@ -76,6 +76,7 @@ button:hover {
   justify-content: center;
   border: thin solid black;
   margin-top: 3px;
+  margin-bottom: 20px;
   padding: 3px;
   padding-left: 10px;
   background-color: var(--colour-sub1);
@@ -537,5 +538,9 @@ button:hover {
   align-self: center;
   padding-left: 10px;
   padding-right: 10px;
+}
 
+.account-articles h2{
+  text-align: left;
+  margin-left: 10px;
 }

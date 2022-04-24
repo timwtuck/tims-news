@@ -20,7 +20,7 @@ const Account = ({user, setUser}) => {
                 </section>
             </>}
             <section className="account-articles">
-                {pageStatus === 'loaded' && <h3>My Articles: </h3>}
+                {pageStatus === 'loaded' && <h2>My Articles: </h2>}
                 <DisplayArticles query={{
                     author:user,
                     sortBy: 'votes',
