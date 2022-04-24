@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Articles/>}></Route>
         <Route path='/login' element={<Login setUser={setUser}/>}></Route>
-        <Route path='/account' element={<Account user={user}/>}/>
+        <Route path='/account' element={<Account user={user} setUser={setUser}/>}/>
         <Route path='/articles' element={<Articles/>}></Route>
         <Route path='/articles/:article_id' element={<DisplayArticle user={user}/>}></Route>
         <Route path='*' element={displayPageStatusFeedback('not found', 'Error: 404\nPage Not Found')}/>

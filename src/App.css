@@ -15,6 +15,17 @@
   background-color: var(--colour-page-bg);
 }
 
+.generic-banner {
+  text-align: left;
+  border: thin solid black;
+  margin-top: 3px;
+  padding: 3px;
+  padding-left: 5%;
+  background-color: var(--colour-sub1);
+  font-weight: bold;
+  justify-content: left;
+}
+
 .display-page {
   display: block;
   margin: auto;
@@ -402,11 +413,15 @@ button:hover {
 
 .login__main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 50px;
 }
 
 .login__form {
+  width: 50%;
+  align-self: center;
+  margin-top: 50px;
+  padding: 20px;
   display: grid;
   grid-template-columns: min-content auto;
   grid-template-rows: auto auto min-content min-content;
@@ -417,9 +432,11 @@ button:hover {
     'error error';
     border: thin solid black;
     width: 600px;
+    background-color:  var(--colour-bg);
 }
 
 .login__form label {
+  font-size: large;
   padding: 10px;
 }
 
@@ -447,14 +464,21 @@ button:hover {
 
 .login__form button {
   grid-area: button;
-  width:60px;
-  margin-left: 20px;
-  text-align: center;
+    background-color: rgba(255, 83, 61, 0.7);
+    width: min-content;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: large;
+    margin-top:  20px;
+    margin-left: 40px;
+    margin-bottom: 0px;;
 } 
 
 .login__form-error {
   grid-area: error;
   height: 20px;
+  font-style: italic;
+  font-size: large;
 } 
 
 /*---------------------------------------------------------*/
@@ -480,17 +504,6 @@ button:hover {
   display:flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.account-banner {
-  text-align: left;
-  border: thin solid black;
-  margin-top: 3px;
-  padding: 3px;
-  padding-left: 5%;
-  background-color: var(--colour-sub1);
-  font-weight: bold;
-  justify-content: left;
 }
 
 .account-info {
