@@ -69,10 +69,10 @@ const Votes = ({hideButtons, cssClass, votes, id, apiCall}) => {
 
         <div className={`${cssClass}`}>
             <button className={`${voteState.upVote?"":"not-"}voted`} 
-                hidden={hideButtons?"hidden":""} onClick={() => onChangeVote(true)}>↑</button>
+                hidden={hideButtons?"hidden":""} onClick={() => onChangeVote(true)}>▲</button>
             <p>votes: {currVote}</p>
             <button className={`${voteState.downVote?"":"not-"}voted`} 
-                hidden={hideButtons?"hidden":""} onClick={() => onChangeVote(false)}>↓</button>
+                hidden={hideButtons?"hidden":""} onClick={() => onChangeVote(false)}>▼</button>
         </div>
     );
 

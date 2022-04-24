@@ -11,7 +11,7 @@ const Comment = ({comment, user, deleteComment}) => {
                 id={comment.comment_id} apiCall={patchCommentVote}/>
 
             {user===comment.author && <button className="comment__delete"
-                onClick={() => deleteComment(comment.comment_id)}>delete</button>}
+                onClick={() => deleteComment(comment.comment_id)}>X</button>}
         </section>
     )
 }

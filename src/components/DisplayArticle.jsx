@@ -1,11 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
+
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
 import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
 import Article from './Article';
 import Comment from "./Comment";
 import AddComment from "./AddComment";
+import SearchBar from "./SearchBar";
 import { displayPageStatusFeedback, handleError } from "../utils";
-
 
 const DisplayArticle = ({user}) => {
 
@@ -22,8 +23,13 @@ const DisplayArticle = ({user}) => {
     const [pageStatus, setPageStatus] = useState('loading');
     const [commentPage, setCommentPage] = useState(1);
     const [loadMoreStatus, setLoadMoreStatus] = useState('idle');
-    
-    
+
+    let [searchParams, setSearchParams] = useSearchParams();
+    const query = {};
+    query.topic = searchParams.get('topic') || '';
+    query.order = searchParams.get('order') || 'desc';
+    query.sortBy = searchParams.get('sort_by') || 'votes';
+   
     useEffect(() => {
         const getArticle = getArticleById(article_id);
         const getComments = getArticleComments(article_id, commentsLimit, commentPage);
@@ -124,8 +130,8 @@ const DisplayArticle = ({user}) => {
     function displayButton() {
 
         if ((commentPage*commentsLimit) < commentCount && pageStatus === "loaded"){
-            const buttonText = loadMoreStatus === 'idle' ? "Display More" : "Loading...";
-            return <button onClick={onDisplayMore}>{buttonText}</button>;
+            const buttonText = loadMoreStatus === 'idle' ? "Display More ▼" : "Loading...";
+            return <button className="display-more-button" onClick={onDisplayMore}>{buttonText}</button>;
         }
     }
 
@@ -134,12 +140,15 @@ const DisplayArticle = ({user}) => {
             {displayPageStatusFeedback(pageStatus, 'Article Not Found')}
             {pageStatus === 'loaded' &&
                 <>
-                    <Article article={article} thumbnail={false} commentCount={commentCount}/>
-                    <AddComment user={user} onPostComment={onPostComment}/>
-                    <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
-                    {comments.map(comment => <Comment key={comment.comment_id} 
-                    comment={comment} user={user} deleteComment={onDeleteComment}/>)}
-                    {displayButton()}
+                    <SearchBar setSearchParams={setSearchParams}/>
+                    <section className="display-page">
+                        <Article article={article} thumbnail={false} commentCount={commentCount}/>
+                        <AddComment user={user} onPostComment={onPostComment}/>
+                        <p>{comments.length ? 'Comments: ' : 'No Comments'}</p>
+                        {comments.map(comment => <Comment key={comment.comment_id} 
+                        comment={comment} user={user} deleteComment={onDeleteComment}/>)}
+                        {displayButton()}
+                    </section>
                 </>
             }
         </main>

@@ -2,11 +2,11 @@ import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTopics } from '../api';
 
-const DropDown = ({children, setState, id}) => {
+const DropDown = ({children, setState, id, label}) => {
 
     return (
         <>
-            <label htmlFor={id}>Topics: </label>
+            <label htmlFor={id}>{label}: </label>
             <select id={id} name={id} 
                 onChange={(e) => setState(e.target.value)}>
                 {children}
@@ -44,11 +44,11 @@ const SearchBar = ({setSearchParams}) => {
 
     return (
         <form className="search-bar" onSubmit={onSearch}>
-            <DropDown setState={setSelectedTopic} id="topic">
+            <DropDown setState={setSelectedTopic} id="topic" label="Topics">
                 {topics.map(topic => 
                     <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
             </DropDown>
-            <DropDown setState={setSelectedSortBy} id="sort-by">
+            <DropDown setState={setSelectedSortBy} id="sort-by" label="Sort by">
                <option>Hottest</option>
                <option>Newest</option>
                <option>Oldest</option>

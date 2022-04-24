@@ -13,7 +13,7 @@ const Article = ({api, article, thumbnail, commentCount}) => {
 
     return (
         <section className={cssClass}>
-            {!thumbnail && <button  onClick={() => navigate(-1)} className="article__back">←</button>}
+            {!thumbnail && <button  onClick={() => navigate(-1)} className="article__back">➨</button>}
             <h3>{article.title}</h3>
             <p className={`${cssClass}__body`}>{article.body}</p>
             <p className={`${cssClass}__author`}>posted by: {article.author}</p>

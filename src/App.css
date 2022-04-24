@@ -1,6 +1,29 @@
+/*---------------------------------------------------------*/
+/* Generic Styling                                        */
+:root {
+  --colour-main: #0F1626;
+  --colour-sub1: #AB987A;
+  --colour-sub2: #FF533D;
+  --colour-bg: #F5F5F5;
+}
+
 .App {
   text-align: center;
+  font-family: 'Sarabun',
+  sans-serif;
+  background-color: var(--colour-bg);
 }
+
+.display-page {
+  display: block;
+  margin: auto;
+  width: 90%;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 
 /*---------------------------------------------------------*/
 /* Header                                                   */
@@ -9,12 +32,17 @@
   display:grid;
   grid-template-columns: auto min-content;
   grid-area: title account;
-  border: thin solid black;
+  background-color: var(--colour-bg);
 }
 
 .header h1 {
   text-align: left;
   margin: 10px;
+  margin-left: 30px;
+  color: var(--colour-main);
+  font-family: 'Square Peg', cursive;
+  letter-spacing: 0.5em;
+  font-size: 2em;
 }
 
 .header a {
@@ -32,17 +60,35 @@
 
 .search-bar {
   display:flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   border: thin solid black;
   margin-top: 3px;
   padding: 3px;
+  padding-left: 10px;
+  background-color: var(--colour-sub1);
+  font-weight: bold;
+  justify-content: left;
+}
+
+.search-bar label {
+  width: max-content;
+  margin-right: 3px;
 }
 
 .search-bar select {
   margin-right: 10px;
   margin-left: 2px;
   padding: 3px;
+  border: #FF533D;
+}
+
+.search-bar button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 /*---------------------------------------------------------*/
@@ -50,21 +96,29 @@
 
 .article__link {
   text-decoration: none;
-  color: black;
+  color: var(--colour-main);
 }
 
 .article-thumbnail {
-  border: thin solid black;
+  border: thin solid var(--colour-main);
+  border-radius:5px;
   padding: 5px;
-  margin:2px;
+  margin:5px;
   display: grid;
-  grid-template-columns: auto 70px;
+  grid-template-columns: auto min-content;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
     'title author'
     'content content'
     'comments votes';
-  color:black;
+    background-color: var(--colour-bg);
+}
+
+.article-thumbnail h3 {
+  padding-bottom: 5px;
+  border-bottom: thick solid var(--colour-sub2);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .article-thumbnail__body {
@@ -73,33 +127,35 @@
   text-overflow: ellipsis;
   overflow:hidden;
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%)
-  
 }
  
 .article-thumbnail__author {
   grid-area: author;
   font-size: 0.8em;
-
+  min-width: 100px;
 }
 
 .article-thumbnail__votes {
   grid-area: votes;
+  font-weight: bold;
 }
 
 .article-thumbnail__comment-count {
   grid-area: comments;
   text-align: left;
   padding-left: 10px;
+  font-weight: bold;
 }
 
 /*---------------------------------------------------------*/
 /* DisplayArticle (Single)                                 */
 
 .article {
-  border: thin solid black;
+  border: 0.2em solid var(--colour-main);
+  border-radius: 5px;
   padding: 5px;
   padding-bottom: 0px;;
-  margin: 2px;
+  margin: 10px;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto auto;
@@ -107,24 +163,44 @@
     'title title'
     'author empty'
     'content content'
-    'comments votes';
+    'votes votes';
 }
 
 .article__back {
   grid-area: title;
-  width: 60px;
+  display: flex;
+  text-align: right;
+  width: min-content;
+  background-color: transparent;
+  color: var(--colour-main);
+  border: none;
+  font-size: x-large;
+  font-weight: bolder; 
+  transform: rotate(180deg);
   height: 30px;
+  align-items: center;
+}
+
+.article__back:hover {
+
+    background-color: rgba(255, 83, 61, 0.5);
+    border-radius: 30%;
 }
 
 .article h3 {
   grid-area:title;
   padding-bottom: 0px;
   margin-bottom: 0px;
+  border-bottom: thick solid var(--colour-sub2);
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 10px;
 }
 
 .article__body {
   grid-area: content;
   padding-bottom: 0px;
+  text-align: left;;
 }
 
 .article__author {
@@ -132,7 +208,7 @@
   font-size: 0.8em;
   text-align: left;
   padding-left: 5px;
-  padding-top: 0px;
+  padding-top: 5px;
   margin-top: 0px;
 }
 
@@ -142,30 +218,32 @@
   padding-right: 10px;
   padding-bottom: 0px;
   margin-bottom: 0px;
+  font-weight: bold;
+  display: flex;
+  justify-content: right;
 }
 
 .article__votes p {
   display: inline;
-  color: blue;
-  padding-left: 5px;
-  padding-right: 5px;
+  color: var(--colour-main);
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: bold;
+  height: 50px;
+  bottom: 0;
+}
+
+.article__votes button {
+  min-width: 38px;
 }
 
 .article__comment-count {
-  grid-area: comments;
+  grid-area: votes;
+  display: flex;
   text-align: left;
   padding-left: 10px;
   padding-bottom:0px;
-}
-
-.article--voted {
-  color:crimson;
-  background-color: grey;
-}
-
-.article--not-voted {
-  color:rgb(97, 96, 96);
-  background-color: whitesmoke;
+  font-weight: bold;
 }
 
 /*---------------------------------------------------------*/
@@ -178,13 +256,16 @@
   grid-template-areas: 
     'label button'
     'textbox textbox';
-  border: thin solid black;
+  border-radius: 5px;
+  margin: 5px;
 }
 
 .add-comment p {
   grid-area: label;
   text-align: left;
   padding-left: 10px;
+  font-size: large;
+  font-weight: bold;
 }
 
 .add-comment textarea {
@@ -196,11 +277,15 @@
 .add-comment button {
   grid-area: button;
   margin: 10px;
+  border: thin solid grey;
+  border-radius: 5px;
+
 }
 
 .add-comment__button--enabled {
 
-  background-color: rgb(151, 148, 148);
+  background-color: rgb(189, 183, 183);
+  color: var(--colour-main);
 }
 
 .add-comment__button--disabled {
@@ -213,13 +298,21 @@
 /* Votes                                                */
 
 .voted {
-  color:crimson;
-  background-color: grey;
+  color: var(--colour-sub2);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: x-large;
+  height: 50px;
 }
 
 .not-voted {
   color:rgb(97, 96, 96);
-  background-color: whitesmoke;
+  background-color: transparent;
+  border:none;
+  outline: none;
+  font-size: large;
+  height: 50px;
 }
 
 /*---------------------------------------------------------*/
@@ -228,46 +321,71 @@
 .comment {
 
   display: grid;
-  grid-template-columns: auto auto min-content;
+  grid-template-columns: min-content auto min-content;
   grid-template-rows: auto auto;
   grid-template-areas: 
     'body body delete'
-    'author votes votes';
+    'votes votes votes';
     border: thin solid black;
+    border-radius: 5px;
     margin: 5px;
 }
 
 .comment__body {
   grid-area: body;
   text-align: left;
-  margin: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: rgb(235, 230, 230);
+  padding: 3px;
 }
 
 .comment__author {
-  grid-area: author;
+  grid-area: votes;
   text-align: left;
   margin-left: 10px;
+  font-size: small;
+  top: 0;
+  padding-top: 0px;
+  margin-top: 0px;
+  width:max-content;
 }
 
 .comment__votes {
   grid-area: votes;
   text-align: right;
   padding-right: 10px;
+  bottom: 0px;
+  overflow: hidden;
 }
 
 .comment__votes p {
-  display:inline;
-  padding: 5px;
+  display:inline-block;
+  padding: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  bottom: 0;
+}
+
+.comment__votes button{
+  display:inline-block;
+  min-width: 40px;
+  padding: 0px;
+  bottom: 0;
+  margin-bottom: 0px;
+
 }
 
 .comment__delete {
   grid-area: delete;
   margin-top: 10px;
   margin-right: 10px;
-  height: 25px;
-  background-color: crimson;
+  height: 20px;
+  background-color: var(--colour-sub2);
   color: white;
+  font-weight: bold;
+  border: thin solid var(--colour-main);
 }
 
 /*---------------------------------------------------------*/
@@ -330,3 +448,18 @@
   height: 20px;
 } 
 
+/*---------------------------------------------------------*/
+/* Display More button                                     */
+
+.display-more-button {
+  font-size: large;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.display-more-button:hover {
+  background-color: rgba(255, 83, 61, 0.5);
+  border-radius: 10%;
+}
