@@ -5,13 +5,14 @@
   --colour-sub1: #AB987A;
   --colour-sub2: #FF533D;
   --colour-bg: #F5F5F5;
+  --colour-page-bg: #f0ecec;
 }
 
 .App {
   text-align: center;
   font-family: 'Sarabun',
   sans-serif;
-  background-color: var(--colour-bg);
+  background-color: var(--colour-page-bg);
 }
 
 .display-page {
@@ -32,7 +33,6 @@ button:hover {
   display:grid;
   grid-template-columns: auto min-content;
   grid-area: title account;
-  background-color: var(--colour-bg);
 }
 
 .header h1 {
@@ -164,6 +164,7 @@ button:hover {
     'author empty'
     'content content'
     'votes votes';
+    background-color: var(--colour-bg);
 }
 
 .article__back {
@@ -336,6 +337,7 @@ button:hover {
     border: thin solid black;
     border-radius: 5px;
     margin: 5px;
+  background-color: var(--colour-bg);
 }
 
 .comment__body {
@@ -469,4 +471,58 @@ button:hover {
 .display-more-button:hover {
   background-color: rgba(255, 83, 61, 0.5);
   border-radius: 10%;
+}
+
+/*---------------------------------------------------------*/
+/* Account Page                                           */
+
+.account-page {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-banner {
+  text-align: left;
+  border: thin solid black;
+  margin-top: 3px;
+  padding: 3px;
+  padding-left: 5%;
+  background-color: var(--colour-sub1);
+  font-weight: bold;
+  justify-content: left;
+}
+
+.account-info {
+  display:block;
+  flex-direction: column;
+  border: thin solid var(--colour-main);
+  margin: 10px;
+  margin-bottom: 30px;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--colour-bg);
+  width: 90%;
+  align-self: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.account-info button {
+
+  background-color: rgba(255, 83, 61, 0.7);
+  width: min-content;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.account-articles {
+  
+  width: 90%;
+  border-top: thick double var(--colour-sub2);
+  align-self: center;
+  padding-left: 10px;
+  padding-right: 10px;
+
 }
