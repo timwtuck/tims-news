@@ -57,8 +57,8 @@ const DisplayArticles = ({query}) => {
     function displayButton() {
 
         if ((page*articlesLimit) < totalCount && pageStatus === "loaded"){
-            const buttonText = loadMoreStatus === 'idle' ? "Display More" : "Loading...";
-            return <button onClick={onDisplayMore}>{buttonText}</button>;
+            const buttonText = loadMoreStatus === 'idle' ? "Display More ▼" : "Loading...";
+            return <button className="display-more-button" onClick={onDisplayMore}>{buttonText}</button>;
         }
     }
 

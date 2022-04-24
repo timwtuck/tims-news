@@ -20,8 +20,8 @@
   width: 90%;
 }
 
-.display-more-button {
-  
+button:hover {
+  cursor: pointer;
 }
 
 
@@ -60,6 +60,7 @@
 
 .search-bar {
   display:flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   border: thin solid black;
@@ -71,6 +72,11 @@
   justify-content: left;
 }
 
+.search-bar label {
+  width: max-content;
+  margin-right: 3px;
+}
+
 .search-bar select {
   margin-right: 10px;
   margin-left: 2px;
@@ -79,6 +85,8 @@
 }
 
 .search-bar button {
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-radius: 5px;
   padding: 5px;
 }
@@ -155,13 +163,28 @@
     'title title'
     'author empty'
     'content content'
-    'comments votes';
+    'votes votes';
 }
 
 .article__back {
   grid-area: title;
-  width: 60px;
+  display: flex;
+  text-align: right;
+  width: min-content;
+  background-color: transparent;
+  color: var(--colour-main);
+  border: none;
+  font-size: x-large;
+  font-weight: bolder; 
+  transform: rotate(180deg);
   height: 30px;
+  align-items: center;
+}
+
+.article__back:hover {
+
+    background-color: rgba(255, 83, 61, 0.5);
+    border-radius: 30%;
 }
 
 .article h3 {
@@ -196,7 +219,8 @@
   padding-bottom: 0px;
   margin-bottom: 0px;
   font-weight: bold;
-  
+  display: flex;
+  justify-content: right;
 }
 
 .article__votes p {
@@ -209,8 +233,13 @@
   bottom: 0;
 }
 
+.article__votes button {
+  min-width: 38px;
+}
+
 .article__comment-count {
-  grid-area: comments;
+  grid-area: votes;
+  display: flex;
   text-align: left;
   padding-left: 10px;
   padding-bottom:0px;
@@ -292,11 +321,11 @@
 .comment {
 
   display: grid;
-  grid-template-columns: auto auto min-content;
+  grid-template-columns: min-content auto min-content;
   grid-template-rows: auto auto;
   grid-template-areas: 
     'body body delete'
-    'author votes votes';
+    'votes votes votes';
     border: thin solid black;
     border-radius: 5px;
     margin: 5px;
@@ -305,25 +334,47 @@
 .comment__body {
   grid-area: body;
   text-align: left;
-  margin: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: rgb(235, 230, 230);
+  padding: 3px;
 }
 
 .comment__author {
-  grid-area: author;
+  grid-area: votes;
   text-align: left;
   margin-left: 10px;
+  font-size: small;
+  top: 0;
+  padding-top: 0px;
+  margin-top: 0px;
+  width:max-content;
 }
 
 .comment__votes {
   grid-area: votes;
   text-align: right;
   padding-right: 10px;
+  bottom: 0px;
+  overflow: hidden;
 }
 
 .comment__votes p {
-  display:inline;
-  padding: 5px;
+  display:inline-block;
+  padding: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  bottom: 0;
+}
+
+.comment__votes button{
+  display:inline-block;
+  min-width: 40px;
+  padding: 0px;
+  bottom: 0;
+  margin-bottom: 0px;
+
 }
 
 .comment__delete {
@@ -397,3 +448,18 @@
   height: 20px;
 } 
 
+/*---------------------------------------------------------*/
+/* Display More button                                     */
+
+.display-more-button {
+  font-size: large;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.display-more-button:hover {
+  background-color: rgba(255, 83, 61, 0.5);
+  border-radius: 10%;
+}
