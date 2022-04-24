@@ -24,7 +24,7 @@ const SearchBar = ({setSearchParams}) => {
 
     useEffect(() => {
         getTopics()
-            .then(topics => setTopics(topics))
+            .then(topics => setTopics([{slug:''}, ...topics]))
     }, []);
 
     function onSearch(e) {
