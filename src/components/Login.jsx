@@ -32,6 +32,7 @@ const Login = ({setUser}) => {
     
     return (
         <main className="login__main">
+            <h2 className="generic-banner">Login: </h2>
             <form className="login__form" onSubmit={onLogin}>
                 <label className="login__form-username-label" htmlFor="username">Username: </label>
                 <input className="login__form-username" value={username} onChange={(e)=> {setUsername(e.target.value); setErrMsg('');}} 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getArticles } from '../api';
 import { displayPageStatusFeedback, handleError } from '../utils';
 
-const DisplayArticles = ({query}) => {
+const DisplayArticles = ({query, setParentPageStatus}) => {
   
     const articlesLimit = 5;
     const [articles, setArticles] = useState([]);
@@ -22,13 +22,17 @@ const DisplayArticles = ({query}) => {
         // get the query path
         let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${articlesLimit}`;
         path += query.topic ? `&topic=${query.topic}` : '';
+        path += query.author ? `&author=${query.author}` : '';
 
         // grab the articles, and set states
         getArticles(path)
             .then(res => {
                 setArticles(res.articles);
                 setTotalCount(res.totalCount);
-                setPageStatus('loaded')
+                setPageStatus('loaded');
+                console.log(setParentPageStatus, '<<<');
+                if (setParentPageStatus)
+                    setParentPageStatus('loaded');
             })
         .catch((err) => handleError(err, setPageStatus));
     }, [query]);
@@ -41,6 +45,7 @@ const DisplayArticles = ({query}) => {
 
         let path = `/articles?sort_by=${query.sortBy}&order=${query.order}&limit=${articlesLimit}&p=${page+1}`;
         path += query.topic ? `&topic=${query.topic}` : '';
+        path += query.author ? `&author=${query.author}` : '';
 
         getArticles(path)
             .then(res => {

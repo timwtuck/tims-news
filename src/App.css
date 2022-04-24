@@ -5,13 +5,25 @@
   --colour-sub1: #AB987A;
   --colour-sub2: #FF533D;
   --colour-bg: #F5F5F5;
+  --colour-page-bg: #f0ecec;
 }
 
 .App {
   text-align: center;
   font-family: 'Sarabun',
   sans-serif;
-  background-color: var(--colour-bg);
+  background-color: var(--colour-page-bg);
+}
+
+.generic-banner {
+  text-align: left;
+  border: thin solid black;
+  margin-top: 3px;
+  padding: 3px;
+  padding-left: 5%;
+  background-color: var(--colour-sub1);
+  font-weight: bold;
+  justify-content: left;
 }
 
 .display-page {
@@ -32,7 +44,6 @@ button:hover {
   display:grid;
   grid-template-columns: auto min-content;
   grid-area: title account;
-  background-color: var(--colour-bg);
 }
 
 .header h1 {
@@ -65,6 +76,7 @@ button:hover {
   justify-content: center;
   border: thin solid black;
   margin-top: 3px;
+  margin-bottom: 20px;
   padding: 3px;
   padding-left: 10px;
   background-color: var(--colour-sub1);
@@ -164,6 +176,7 @@ button:hover {
     'author empty'
     'content content'
     'votes votes';
+    background-color: var(--colour-bg);
 }
 
 .article__back {
@@ -318,6 +331,13 @@ button:hover {
 /*---------------------------------------------------------*/
 /* Comments                                                */
 
+.comment-label {
+  text-align: left;
+  padding-left: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
 .comment {
 
   display: grid;
@@ -329,6 +349,7 @@ button:hover {
     border: thin solid black;
     border-radius: 5px;
     margin: 5px;
+  background-color: var(--colour-bg);
 }
 
 .comment__body {
@@ -393,11 +414,15 @@ button:hover {
 
 .login__main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 50px;
 }
 
 .login__form {
+  width: 50%;
+  align-self: center;
+  margin-top: 50px;
+  padding: 20px;
   display: grid;
   grid-template-columns: min-content auto;
   grid-template-rows: auto auto min-content min-content;
@@ -408,9 +433,11 @@ button:hover {
     'error error';
     border: thin solid black;
     width: 600px;
+    background-color:  var(--colour-bg);
 }
 
 .login__form label {
+  font-size: large;
   padding: 10px;
 }
 
@@ -438,14 +465,21 @@ button:hover {
 
 .login__form button {
   grid-area: button;
-  width:60px;
-  margin-left: 20px;
-  text-align: center;
+    background-color: rgba(255, 83, 61, 0.7);
+    width: min-content;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: large;
+    margin-top:  20px;
+    margin-left: 40px;
+    margin-bottom: 0px;;
 } 
 
 .login__form-error {
   grid-area: error;
   height: 20px;
+  font-style: italic;
+  font-size: large;
 } 
 
 /*---------------------------------------------------------*/
@@ -462,4 +496,51 @@ button:hover {
 .display-more-button:hover {
   background-color: rgba(255, 83, 61, 0.5);
   border-radius: 10%;
+}
+
+/*---------------------------------------------------------*/
+/* Account Page                                           */
+
+.account-page {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-info {
+  display:block;
+  flex-direction: column;
+  border: thin solid var(--colour-main);
+  margin: 10px;
+  margin-bottom: 30px;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--colour-bg);
+  width: 90%;
+  align-self: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.account-info button {
+
+  background-color: rgba(255, 83, 61, 0.7);
+  width: min-content;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.account-articles {
+  
+  width: 90%;
+  border-top: thick double var(--colour-sub2);
+  align-self: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.account-articles h2{
+  text-align: left;
+  margin-left: 10px;
 }
