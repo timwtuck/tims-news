@@ -16,13 +16,18 @@ const PostArticle = ({user}) => {
 
     useEffect(() => {
 
-        getTopics()
-            .then(topics => {
-                setTopics(topics);
-                setPageStatus('loaded');
-                if (topics.length > 0)
-                    setSelectedTopic(topics[0].slug);
-            });
+         if (!user){
+            navigate('/login');
+         }
+         else {
+            getTopics()
+                .then(topics => {
+                    setTopics(topics);
+                    setPageStatus('loaded');
+                    if (topics.length > 0)
+                        setSelectedTopic(topics[0].slug);
+                });
+        }
     })
 
 
