@@ -12,6 +12,9 @@
 
     if (pageStatus === "bad request")
         return <h2>400: Bad Request</h2>;
+
+    if(pageStatus === "deleting article")
+        return <h2>Deleting Article...</h2>;
         
     if (pageStatus === "error")
         return <h2>Something went wrong, please refresh page</h2>;

@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import { patchArticleVote } from '../api';
 import Votes from './Votes';
 
-const Article = ({api, article, thumbnail, commentCount}) => {
+const Article = ({user, article, thumbnail, commentCount, onDelete}) => {
 
     const cssClass = thumbnail ? "article-thumbnail" : "article";
     const navigate = useNavigate();
@@ -20,6 +20,8 @@ const Article = ({api, article, thumbnail, commentCount}) => {
             <p className={`${cssClass}__comment-count`}>Comments: {commentCount}</p>
             {article.votes !== undefined && <Votes cssClass={`${cssClass}__votes`} votes={article.votes} 
                 id={article.article_id} apiCall={patchArticleVote} hideButtons={thumbnail}/>}
+            {user===article.author && <button className="article__delete"
+                onClick={onDelete}>X</button>}
         </section>
     )
 }

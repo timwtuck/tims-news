@@ -94,6 +94,7 @@ button:hover {
   margin-left: 2px;
   padding: 3px;
   border: #FF533D;
+  min-width: 100px;
 }
 
 .search-bar button {
@@ -221,6 +222,19 @@ button:hover {
 
     background-color: rgba(255, 83, 61, 0.5);
     border-radius: 30%;
+}
+
+.article__delete {
+  grid-area: title;
+  display:flex;
+  justify-self:right;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 20px;
+  background-color: var(--colour-sub2);
+  color: white;
+  font-weight: bold;
+  border: thin solid var(--colour-main);
 }
 
 .article h3 {

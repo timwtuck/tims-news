@@ -1,7 +1,7 @@
 
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
-import { getArticleById, getArticleComments, deleteComment, postComment } from "../api";
+import { getArticleById, getArticleComments, deleteComment, postComment, deleteArticle } from "../api";
 import Article from './Article';
 import Comment from "./Comment";
 import AddComment from "./AddComment";
@@ -93,6 +93,18 @@ const DisplayArticle = ({user}) => {
             });
     }
 
+    function onDeleteArticle(){
+
+        setPageStatus('deleting article');
+
+        deleteArticle(article_id)
+            .then(() => navigate('/'))
+            .catch((err) => {
+                alert('Something went wrong, please try again');
+                setPageStatus('loaded');
+            });
+    }
+
     function onDeleteComment(commentId) {
 
         const newComments = comments.filter(
@@ -142,7 +154,7 @@ const DisplayArticle = ({user}) => {
                 <>
                     <SearchBar query={query} setSearchParams={setSearchParams}/>
                     <section className="display-page">
-                        <Article article={article} thumbnail={false} commentCount={commentCount}/>
+                        <Article user={user} article={article} thumbnail={false} commentCount={commentCount} onDelete={onDeleteArticle}/>
                         <AddComment user={user} onPostComment={onPostComment}/>
                         <p className="comment-label">{comments.length ? 'Comments: ' : 'No Comments'}</p>
                         {comments.map(comment => <Comment key={comment.comment_id} 

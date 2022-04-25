@@ -32,6 +32,11 @@ export const postArticle = (newArticle) => {
         .then((res) =>  res.data.article);
 }
 
+export const deleteArticle = (articleId) => {
+    
+    return api.delete(`/articles/${articleId}`);
+}
+
 
 export const patchArticleVote = (articleId, changeBy) => {
 
