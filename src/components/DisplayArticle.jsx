@@ -140,7 +140,7 @@ const DisplayArticle = ({user}) => {
             {displayPageStatusFeedback(pageStatus, 'Article Not Found')}
             {pageStatus === 'loaded' &&
                 <>
-                    <SearchBar setSearchParams={setSearchParams}/>
+                    <SearchBar query={query} setSearchParams={setSearchParams}/>
                     <section className="display-page">
                         <Article article={article} thumbnail={false} commentCount={commentCount}/>
                         <AddComment user={user} onPostComment={onPostComment}/>

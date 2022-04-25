@@ -30,7 +30,6 @@ const DisplayArticles = ({query, setParentPageStatus}) => {
                 setArticles(res.articles);
                 setTotalCount(res.totalCount);
                 setPageStatus('loaded');
-                console.log(setParentPageStatus, '<<<');
                 if (setParentPageStatus)
                     setParentPageStatus('loaded');
             })
@@ -71,11 +70,17 @@ const DisplayArticles = ({query, setParentPageStatus}) => {
         <section className="display-articles">
             {displayPageStatusFeedback(pageStatus, 'Topic Not Found')}
             {pageStatus === 'loaded' &&
-            articles.map(article => 
-            <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
-                <Article 
-                    cssClass="article-thumbnail" article={article} thumbnail={true}/>
-            </Link>)
+            <>
+                <div className="article-results">
+                    {!setParentPageStatus && <h2>{query.topic ? `Showing results for ${query.topic}` : 'Showing all categories'} </h2>}
+                    <Link to='/post-article'><button>Post New Article</button></Link>
+                </div>
+                {articles.map(article => 
+                <Link key={article.article_id} className="article__link" to={`/articles/${article.article_id}`}>
+                    <Article 
+                        cssClass="article-thumbnail" article={article} thumbnail={true}/>
+                </Link>)}
+                </>
             }
             {displayButton()}
         </section>

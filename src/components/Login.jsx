@@ -22,7 +22,6 @@ const Login = ({setUser}) => {
 
         if (!usersArr.includes(username)){
             setErrMsg('Username doesn\'t exist');
-            console.log(users, username)
             return;
         }
 

@@ -4,6 +4,9 @@
     if (pageStatus === "loading")
         return <h2>Page Loading...</h2>;
 
+    if (pageStatus === "posting")
+        return <h2>Posting Article...</h2>;
+
     if (pageStatus === "not found")
         return <h2>{notFoundMsg}</h2>;
 

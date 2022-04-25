@@ -7,7 +7,7 @@ const api = axios.create({
 export const getTopics = () => {
 
     return api.get('/topics')
-        .then((res) => [{slug:''}, ...res.data.topics]);
+        .then((res) => res.data.topics);
 }
 
 export const getArticles = (path) => {
@@ -25,6 +25,12 @@ export const getArticleById = (articleId) => {
     return api.get(`/articles/${articleId}`)
             .then(res => res.data.article);
 } 
+
+export const postArticle = (newArticle) => {
+
+    return api.post(`/articles`, newArticle)
+        .then((res) =>  res.data.article);
+}
 
 
 export const patchArticleVote = (articleId, changeBy) => {

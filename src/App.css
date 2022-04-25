@@ -106,6 +106,29 @@ button:hover {
 /*---------------------------------------------------------*/
 /* DisplayArticles  (multiple)                             */
 
+.article-results {
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-template-areas: 'title button';
+}
+
+.article-results h2 {
+  grid-area: title;
+  text-align: left;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.article-results button {
+  grid-area: button;
+  margin: 20px;
+  margin-left: 0px;
+  background-color: rgba(255, 83, 61, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: large;
+}
+
 .article__link {
   text-decoration: none;
   color: var(--colour-main);
@@ -543,4 +566,79 @@ button:hover {
 .account-articles h2{
   text-align: left;
   margin-left: 10px;
+}
+
+/*---------------------------------------------------------*/
+/* Post Article                                          */
+
+.post-article-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-article__back {
+  display: flex;
+  text-align: right;
+  width: min-content;
+  background-color: transparent;
+  color: var(--colour-main);
+  border: none;
+  font-size: x-large;
+  font-weight: bolder;
+  transform: rotate(180deg);
+  height: 30px;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.post-article__back:hover {
+
+  background-color: rgba(255, 83, 61, 0.5);
+  border-radius: 30%;
+}
+
+.post-article {
+  display: flex;
+  flex-direction: column;
+  border: thin solid black;
+  background-color: var(--colour-bg);
+  width:80%;
+  align-items: start;
+  padding-left: 20px;
+  margin-top: 30px;
+}
+
+.post-article label {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.post-article input, textarea {
+  padding: 10px;
+  width: 90%;
+}
+
+.post-article textarea {
+  min-height: 200px;
+}
+
+.post-article select {
+  font-size: large;
+}
+
+.post-article button {
+  margin: 20px;
+  margin-left: 0px;
+  background-color: rgba(255, 83, 61, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.post-article p{
+  height: 20px;
+  font-style: italic;
 }
