@@ -469,7 +469,8 @@ button:hover {
     'button button'
     'error error';
     border: thin solid black;
-    width: 600px;
+    min-width: 300px;
+
     background-color:  var(--colour-bg);
 }
 
