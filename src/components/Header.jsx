@@ -9,7 +9,7 @@ const Header = ({user, setUser}) => {
                 <Link to='/'>Articles</Link>
                 {user?  <>
                             <Link to='/account'>Account</Link> 
-                            <Link to='/login' onClick={() => setUser(null)}>Logout</Link>
+                            {/* <Link to='/login' onClick={() => setUser(null)}>Logout</Link> */}
                         </>
                     :   <Link to='/login'>Login</Link>}
             </div>

@@ -2,12 +2,12 @@ import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTopics } from '../api';
 
-const DropDown = ({children, setState, id, label}) => {
+const DropDown = ({children, setState, state, id, label}) => {
 
     return (
         <>
             <label htmlFor={id}>{label}: </label>
-            <select id={id} name={id} 
+            <select id={id} name={id} value={state}
                 onChange={(e) => setState(e.target.value)}>
                 {children}
             </select>
@@ -15,7 +15,15 @@ const DropDown = ({children, setState, id, label}) => {
     );
 }
 
-const SearchBar = ({setSearchParams}) => { 
+const SearchBar = ({query, setSearchParams}) => { 
+    
+    let sortBy;
+    if(query.sortBy === 'created_at')
+        sortBy = query.order === 'asc'? 'Oldest' : 'Newest';
+    else if (query.sortBy === 'comment_count')
+        sortBy = query.order === 'asc' ? 'Least Comments' : 'Most Comments';
+    else
+        sortBy = 'Hottest';
 
     const [topics, setTopics] = useState([{slug:''}]);
     const [selectedTopic, setSelectedTopic] = useState('');
@@ -24,18 +32,24 @@ const SearchBar = ({setSearchParams}) => {
 
     useEffect(() => {
         getTopics()
-            .then(topics => setTopics([{slug:''}, ...topics]))
+            .then(topics => {
+
+                setSelectedTopic(query.topic);
+                setSelectedSortBy(sortBy);
+
+                setTopics([{slug:''}, ...topics]);
+
+            })
     }, []);
 
     function onSearch(e) {
 
         e.preventDefault();
 
-        const order = /(Newest|Least Comments)/.test(selectedSortBy) ? 'asc' : 'desc';
+        const order = /(Oldest|Least Comments)/.test(selectedSortBy) ? 'asc' : 'desc';
         const sortBy = selectedSortBy === 'Hottest' ? 'votes' : 
             /Comments/.test(selectedSortBy) ? 'comment_count' : 'created_at';
         
-            console.log(order, sortBy)
         let path = `/articles?sort_by=${sortBy}&order=${order}`;
         path += selectedTopic ? `&topic=${selectedTopic}` : '';
 
@@ -44,11 +58,11 @@ const SearchBar = ({setSearchParams}) => {
 
     return (
         <form className="search-bar" onSubmit={onSearch}>
-            <DropDown setState={setSelectedTopic} id="topic" label="Topics">
+            <DropDown setState={setSelectedTopic} state={selectedTopic} id="topic" label="Topics">
                 {topics.map(topic => 
                     <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
             </DropDown>
-            <DropDown setState={setSelectedSortBy} id="sort-by" label="Sort by">
+            <DropDown setState={setSelectedSortBy} state={selectedSortBy} id="sort-by" label="Sort by">
                <option>Hottest</option>
                <option>Newest</option>
                <option>Oldest</option>

@@ -62,25 +62,28 @@ const PostArticle = ({user}) => {
             <h2 className="generic-banner">Post New Article</h2>
             {displayPageStatusFeedback(pageStatus)}
             {pageStatus === 'loaded' &&
-            <main className="post-article-page">
-                <form className="post-article" onSubmit={onPostArticle}>
-                    <label htmlFor="title">Article Title:</label>
-                    <input type="text" name="title" id="title" 
-                        value={title} onChange={(e) => setTitle(e.target.value)}/>
-                    <p>{errMsg.title}</p>
-                    <label htmlFor="body">Article Contents:</label>
-                    <textarea id="body" name="body"
-                        value={body} onChange={(e) => setBody(e.target.value)}/>
-                    <p>{errMsg.body}</p>
-                    <label htmlFor="topic">Topic:</label>
-                    <select id="topic" name="topic" value={selectedTopic} 
-                        onChange={(e) => setSelectedTopic(e.target.value)}>
-                        {topics.map(topic => 
-                        <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
-                    </select>
-                    <button>Post Article</button>
-                </form>
-            </main>     
+            <>
+            <button  onClick={() => navigate(-1)} className="post-article__back">➨</button>
+                <main className="post-article-page">
+                    <form className="post-article" onSubmit={onPostArticle}>
+                        <label htmlFor="title">Article Title:</label>
+                        <input type="text" name="title" id="title" 
+                            value={title} onChange={(e) => {setErrMsg({}); setTitle(e.target.value)}}/>
+                        <p>{errMsg.title}</p>
+                        <label htmlFor="body">Article Contents:</label>
+                        <textarea id="body" name="body"
+                            value={body} onChange={(e) => {setErrMsg({});setBody(e.target.value)}}/>
+                        <p>{errMsg.body}</p>
+                        <label htmlFor="topic">Topic:</label>
+                        <select id="topic" name="topic" state={selectedTopic} 
+                            onChange={(e) => setSelectedTopic(e.target.value)}>
+                            {topics.map(topic => 
+                            <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
+                        </select>
+                        <button>Post Article</button>
+                    </form>
+                </main>  
+            </>   
             }
         </>
 

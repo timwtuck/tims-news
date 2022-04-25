@@ -28,11 +28,8 @@ export const getArticleById = (articleId) => {
 
 export const postArticle = (newArticle) => {
 
-    console.log(newArticle)
-
     return api.post(`/articles`, newArticle)
-        .then((res) => {console.log(res);
-            return res.data.article});
+        .then((res) =>  res.data.article);
 }
 
 
