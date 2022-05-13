@@ -62,7 +62,18 @@ button:hover {
 
 .header__account {
   display: flex;
-  color: blue;
+}
+
+.header__account a {
+  text-decoration: none;
+  font-size: larger;
+  color: black;
+}
+
+.header__account a:hover {
+  text-decoration: none;
+  color: var(--colour-sub2);
+  border-bottom: 5px solid var(--colour-sub2)
 }
 
 
@@ -483,23 +494,6 @@ button:hover {
   margin: 10px;
   padding: 10px;
 }
-
-/* .login__form-username-label {
-  grid-area: username-label;
-}
-
-.login__form-username {
-  grid-area: username;
-}
-
-.login__form-password-label {
-  grid-area:password-label;
-}
-
-.login__form-password {
-  grid-area: password;
-}
-*/
 
 .login__form button {
   grid-area: button;
