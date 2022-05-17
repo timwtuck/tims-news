@@ -58,18 +58,20 @@ const SearchBar = ({query, setSearchParams}) => {
 
     return (
         <form className="search-bar" onSubmit={onSearch}>
-            <DropDown setState={setSelectedTopic} state={selectedTopic} id="topic" label="Topics">
-                {topics.map(topic => 
-                    <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
-            </DropDown>
-            <DropDown setState={setSelectedSortBy} state={selectedSortBy} id="sort-by" label="Sort by">
-               <option>Hottest</option>
-               <option>Newest</option>
-               <option>Oldest</option>
-               <option>Most Comments</option>
-               <option>Least Comments</option>
-            </DropDown>
-            <button>Search</button>
+            <div className="search-bar-container">
+                <DropDown setState={setSelectedTopic} state={selectedTopic} id="topic" label="Topics">
+                    {topics.map(topic => 
+                        <option value={topic.slug} id={topic.slug} key={topic.slug}>{topic.slug}</option>)}
+                </DropDown>
+                <DropDown setState={setSelectedSortBy} state={selectedSortBy} id="sort-by" label="Sort by">
+                <option>Hottest</option>
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                    <option>Most Comments</option>
+                    <option>Least Comments</option>
+                </DropDown>
+                <button>Search</button>
+            </div>
         </form>
     )
 }

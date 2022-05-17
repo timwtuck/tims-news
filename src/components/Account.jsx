@@ -8,8 +8,9 @@ const Account = ({user, setUser}) => {
     const [pageStatus, setPageStatus] = useState('loading');
 
     return (
+        <>
+        <h2 className="generic-banner">Hello {user}!</h2>
         <main className="account-page">
-            <h2 className="generic-banner">Hello {user}!</h2>
             {pageStatus === 'loaded' &&
             <>
                 <section className="account-info">
@@ -28,6 +29,7 @@ const Account = ({user, setUser}) => {
                     }} setParentPageStatus={setPageStatus}/>
             </section>
         </main>
+        </>
     )
 }
 
