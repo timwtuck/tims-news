@@ -15,8 +15,8 @@ const Account = ({user, setUser}) => {
             <>
                 <section className="account-info">
                     <p>Username: {user}</p>
-                    <p>Password: ********</p>
-                    <p>Total Articles: </p>
+                    {/* <p>Password: ********</p>
+                    <p>Total Articles: </p> */}
                     <Link to='/login' onClick={() => setUser(null)}><button>Logout</button></Link>
                 </section>
             </>}

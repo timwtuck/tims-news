@@ -62,8 +62,8 @@ button:hover {
 
 .header__account {
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column; 
+  justify-content: space-between; 
 }
 
 .header__account a {

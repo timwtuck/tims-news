@@ -37,9 +37,9 @@ const Login = ({setUser}) => {
                 <label className="login__form-username-label" htmlFor="username">Username: </label>
                 <input className="login__form-username" value={username} onChange={(e)=> {setUsername(e.target.value); setErrMsg('');}} 
                     type="text" name="username" id="username"/>
-                <label className="login__form-password-label" htmlFor="password">Password: </label>
+                {/* <label className="login__form-password-label" htmlFor="password">Password: </label>
                 <input className="login__form-password" value={password} onChange={(e)=>{setPassword(e.target.value); setErrMsg('');}} 
-                    type="text" name="password" id="password"/>
+                    type="text" name="password" id="password"/> */}
                 <button className="login__form-button">Login</button>
                 <p className="login__form-error">{errMsg}</p>
             </form>
