@@ -148,22 +148,22 @@ const DisplayArticle = ({user}) => {
     }
 
     return (
+        <>
+        <SearchBar query={query} setSearchParams={setSearchParams}/>
         <main>
             {displayPageStatusFeedback(pageStatus, 'Article Not Found')}
             {pageStatus === 'loaded' &&
-                <>
-                    <SearchBar query={query} setSearchParams={setSearchParams}/>
-                    <section className="display-page">
-                        <Article user={user} article={article} thumbnail={false} commentCount={commentCount} onDelete={onDeleteArticle}/>
-                        <AddComment user={user} onPostComment={onPostComment}/>
-                        <p className="comment-label">{comments.length ? 'Comments: ' : 'No Comments'}</p>
-                        {comments.map(comment => <Comment key={comment.comment_id} 
-                        comment={comment} user={user} deleteComment={onDeleteComment}/>)}
-                        {displayButton()}
-                    </section>
-                </>
+            <section className="display-page">
+                <Article user={user} article={article} thumbnail={false} commentCount={commentCount} onDelete={onDeleteArticle}/>
+                <AddComment user={user} onPostComment={onPostComment}/>
+                <p className="comment-label">{comments.length ? 'Comments: ' : 'No Comments'}</p>
+                {comments.map(comment => <Comment key={comment.comment_id} 
+                comment={comment} user={user} deleteComment={onDeleteComment}/>)}
+                {displayButton()}
+            </section>
             }
         </main>
+        </>
     );
 }
 

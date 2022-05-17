@@ -16,7 +16,7 @@
 }
 
 .generic-banner {
-  text-align: left;
+  text-align: center;
   border: thin solid black;
   margin-top: 3px;
   padding: 3px;
@@ -62,6 +62,8 @@ button:hover {
 
 .header__account {
   display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
 }
 
 .header__account a {
@@ -76,6 +78,14 @@ button:hover {
   border-bottom: 5px solid var(--colour-sub2)
 }
 
+.header__account--user {
+  font-size: small;
+  padding: 0px;
+  margin-right: 10px;
+  align-self: flex-end;
+  min-height: 40px;
+}
+
 
 /*---------------------------------------------------------*/
 /* Search Bar                                              */
@@ -86,13 +96,16 @@ button:hover {
   align-items: center;
   justify-content: center;
   border: thin solid black;
-  margin-top: 3px;
   margin-bottom: 20px;
   padding: 3px;
   padding-left: 10px;
   background-color: var(--colour-sub1);
   font-weight: bold;
   justify-content: left;
+}
+
+.search-bar-container {
+  margin: 0 auto;
 }
 
 .search-bar label {
@@ -597,8 +610,7 @@ button:hover {
   font-weight: bolder;
   transform: rotate(180deg);
   height: 30px;
-  align-items: center;
-  margin-left: 30px;
+  margin-right: 80%;
 }
 
 .post-article__back:hover {
@@ -650,4 +662,11 @@ button:hover {
 .post-article p{
   height: 20px;
   font-style: italic;
+}
+
+@media screen and (min-width: 1000px) {
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 }

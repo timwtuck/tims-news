@@ -12,12 +12,14 @@ const Articles = () => {
     query.sortBy = searchParams.get('sort_by') || 'votes';
   
     return (
+        <>
+        <SearchBar query={query} setSearchParams={setSearchParams}/>
         <main>
-            <SearchBar query={query} setSearchParams={setSearchParams}/>
             <section className="display-page">
                 <DisplayArticles query={query}/>
             </section>
         </main>
+        </>
     );
 
 }

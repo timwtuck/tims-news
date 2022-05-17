@@ -8,14 +8,15 @@ const Account = ({user, setUser}) => {
     const [pageStatus, setPageStatus] = useState('loading');
 
     return (
+        <>
+        <h2 className="generic-banner">Hello {user}!</h2>
         <main className="account-page">
-            <h2 className="generic-banner">Hello {user}!</h2>
             {pageStatus === 'loaded' &&
             <>
                 <section className="account-info">
                     <p>Username: {user}</p>
-                    <p>Password: ********</p>
-                    <p>Total Articles: </p>
+                    {/* <p>Password: ********</p>
+                    <p>Total Articles: </p> */}
                     <Link to='/login' onClick={() => setUser(null)}><button>Logout</button></Link>
                 </section>
             </>}
@@ -28,6 +29,7 @@ const Account = ({user, setUser}) => {
                     }} setParentPageStatus={setPageStatus}/>
             </section>
         </main>
+        </>
     )
 }
 
